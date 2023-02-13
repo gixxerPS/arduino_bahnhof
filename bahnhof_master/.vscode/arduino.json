@@ -1,0 +1,8 @@
+{
+    "board": "arduino:avr:mega",
+    "sketch": "bahnhof_master.ino",
+    "port": "/dev/ttyUSB1",
+    "programmer": "arduino:avrispmkii",
+    "output": "./build",
+    "configuration": "cpu=atmega2560"
+}

@@ -438,7 +438,7 @@ void loop()
         CCommand::setCmdInputA_Z( CCommand::cT, 0/*rawInputsSlave2[4] & (1<<1) */); // fehlt ???
         
         //4.2 Gleisstati mappen von rawInputs -> railStatus
-        CCommand::setRailInput1li  (rawInputsSlave2[3] & (1<<0));
+        CCommand::setRailInput1li  (rawInputsSlave2[3] & (1<<2));
         CCommand::setRailInput1re  (DI::rawInputsSlave1[5] & (1<<6));
         CCommand::setRailInput1bel (DI::rawInputsSlave1[2] & (1<<2));
         CCommand::setRailInput2li  (rawInputsSlave2[3] & (1<<3));
@@ -591,7 +591,7 @@ void loop()
     Serial.println(CCommand::getActiveCmdCount());
 
     Serial.print("> Aktive: ");
-    for (uint8_t i = 0; i < CCommand::N_COMMANDS; i++) {
+    for (int i = 0; i < CCommand::N_COMMANDS; i++) {
       if (CCommand::activeCommands[i].active) {
         Serial.print("[");
         Serial.print(i);
@@ -604,5 +604,5 @@ void loop()
     }
     Serial.println();
   }
-  //printInputs();
+  printInputs();
 }

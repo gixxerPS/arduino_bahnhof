@@ -225,10 +225,10 @@ int8_t CCommand::checkAndActivateNewCommand()
 
     // 1. ist noch platz im auftragsbuch frei ?
     // 2. wird kombi durch bereits aktivem auftrag verhindert ?
-    for (uint8_t i = N_COMMANDS-1; i >= 0; i--) { // wg fullIdx rueckwaerts damit letzte freie stelle kleinsten idx im auftrags array bekommt
+    for (int i = N_COMMANDS-1; i >= 0; i--) { // wg fullIdx rueckwaerts damit letzte freie stelle kleinsten idx im auftrags array bekommt
         if (activeCommands[i].active) {
-            DEBUG_PRINT("Auftrag aktiv:");
-            DEBUG_PRINTLN(i);
+            COMMAND_DEBUG_PRINT("Auftrag aktiv:");
+            COMMAND_DEBUG_PRINTLN(i);
 
             if (cmdBlocksCurSrcTarget(activeCommands[i])) { // curSrc ODER curTarget bereits im Einsatz ?
                 return -4;
@@ -534,13 +534,15 @@ void CCommand::updateSrcTarget()
 }
 void CCommand::finishCmdByIdx(uint8_t idx)
 {
+    // COMMAND_DEBUG_PRINT("loesche idx ");
+    // COMMAND_DEBUG_PRINTLN(idx);
     if (idx >= 0 && idx <= N_COMMANDS) {
         finishCmd(activeCommands[idx]);
     }
 }
 void CCommand::resetAllCmds()
 {
-    for (uint8_t i = 0; i < N_COMMANDS; i++) { 
+    for (int i = 0; i < N_COMMANDS; i++) { 
         finishCmd(activeCommands[i]);
     }
 }
@@ -555,13 +557,20 @@ void CCommand::finishCmd(commandStruct &cmd)
 void CCommand::checkAndFinishRunningCommand() 
 {
     uint8_t activeCount = 0;
-    for (uint8_t i = N_COMMANDS; i > 0; i--) { // wg fullIdx rueckwaerts damit letzte freie stelle kleinsten idx im auftrags array bekommt
+    for (int i = N_COMMANDS - 1; i >= 0; i--) { // wg fullIdx rueckwaerts damit letzte freie stelle kleinsten idx im auftrags array bekommt
         if (activeCommands[i].active) {
             activeCount++;
+            COMMAND_DEBUG_PRINT("check active[");
+            COMMAND_DEBUG_PRINT(i);
+            COMMAND_DEBUG_PRINT("]: src=");
+            COMMAND_DEBUG_PRINT(activeCommands[i].src);
+            COMMAND_DEBUG_PRINT(" target=");
+            COMMAND_DEBUG_PRINTLN(activeCommands[i].target);
             if (activeCommands[i].target == c1 ) {
                 if (activeCommands[i].src == cN || activeCommands[i].src == cH) {
                     if (getRailInput1re()) {finishCmd(activeCommands[i]);}
                 } else {
+                    COMMAND_DEBUG_PRINT("check 1li");
                     if (getRailInput1li()) {finishCmd(activeCommands[i]);}
                 }
             } else if (activeCommands[i].target == c2) {

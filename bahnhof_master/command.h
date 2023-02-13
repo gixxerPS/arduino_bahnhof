@@ -2,14 +2,14 @@
 #define COMMAND_H
 
 // einkommentieren um debugausgaben zu aktivieren
-//#define COMMAND_DEBUG
+#define COMMAND_DEBUG
 
 #ifdef COMMAND_DEBUG
-	#define DEBUG_PRINT(...) { Serial.print(__VA_ARGS__); }
-	#define DEBUG_PRINTLN(...) { Serial.println(__VA_ARGS__); }
+	#define COMMAND_DEBUG_PRINT(...) { Serial.print(__VA_ARGS__); }
+	#define COMMAND_DEBUG_PRINTLN(...) { Serial.println(__VA_ARGS__); }
 #else
-	#define DEBUG_PRINT(...) {}
-	#define DEBUG_PRINTLN(...) {}
+	#define COMMAND_DEBUG_PRINT(...) {}
+	#define COMMAND_DEBUG_PRINTLN(...) {}
 #endif
 
 namespace CCommand

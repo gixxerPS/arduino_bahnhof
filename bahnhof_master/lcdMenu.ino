@@ -218,6 +218,7 @@ void MYLCD::loop()
     static bool tasteSelectLongPress;
     static bool tasteSelectLongPressEdge;
     static uint8_t activeCmdCountOld = 0;
+    static bool activeOld;
 
     tasteLinks.loop();
     tasteOben.loop();
@@ -253,6 +254,11 @@ void MYLCD::loop()
                 select = false;
                 lcdRefresh = true;
                 lcd.clear();
+            }
+            if (CCommand::activeCommands[selCmd].active != activeOld) {
+                activeOld = CCommand::activeCommands[selCmd].active;
+                lcdRefresh = true;
+                
             }
             if (tasteOben.isReleased()) {
                 select = ! select;

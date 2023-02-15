@@ -270,6 +270,130 @@ int8_t CCommand::checkAndActivateNewCommand()
                 } else if (curSrc == c19 && cmdBlocks19inA(activeCommands[i])) {
                     return -4;
                 }
+            } else if (curTarget == cB) {
+                if (curSrc == c1 && cmdBlocks1inB(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c2 && cmdBlocks2inB(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c3 && cmdBlocks3inB(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c4 && cmdBlocks4inB(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c5 && cmdBlocks5inB(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c6 && cmdBlocks6inB(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c7 && cmdBlocks7inB(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c8 && cmdBlocks8inB(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c9 && cmdBlocks9inB(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c10 && cmdBlocks10inB(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c11 && cmdBlocks11inB(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c13 && cmdBlocks13inB(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c14 && cmdBlocks14inB(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c15 && cmdBlocks15inB(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c16 && cmdBlocks16inB(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c17 && cmdBlocks17inB(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c18 && cmdBlocks18inB(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c19 && cmdBlocks19inB(activeCommands[i])) {
+                    return -4;
+                }
+            } else if (curTarget == cF) {
+                if (curSrc == c5 && cmdBlocks5inF(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c6 && cmdBlocks6inF(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c7 && cmdBlocks7inF(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c8 && cmdBlocks8inF(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c9 && cmdBlocks9inF(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c10 && cmdBlocks10inF(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c11 && cmdBlocks11inF(activeCommands[i])) {
+                    return -4;
+                }
+            } else if (curTarget == cG) {
+                if (curSrc == c1 && cmdBlocks1inG(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c2 && cmdBlocks2inG(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c3 && cmdBlocks3inG(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c4 && cmdBlocks4inG(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c13 && cmdBlocks13inG(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c14 && cmdBlocks14inG(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c15 && cmdBlocks15inG(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c16 && cmdBlocks16inG(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c17 && cmdBlocks17inG(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c18 && cmdBlocks18inG(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c19 && cmdBlocks19inG(activeCommands[i])) {
+                    return -4;
+                }
+            } else if (curTarget == cK) {
+                if (curSrc == c12 && cmdBlocks12inK(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c13 && cmdBlocks13inK(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c14 && cmdBlocks14inK(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c20 && cmdBlocks20inK(activeCommands[i])) {
+                    return -4;
+                } 
+            } else if (curTarget == cL) {
+                if (curSrc == c4 && cmdBlocks4inL(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c6 && cmdBlocks6inL(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c8 && cmdBlocks8inL(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c9 && cmdBlocks9inL(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c12 && cmdBlocks12inL(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c20 && cmdBlocks20inL(activeCommands[i])) {
+                    return -4;
+                }
+            } else if (curTarget == cR) {
+                if (curSrc == c13 && cmdBlocks13inR(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c14 && cmdBlocks14inR(activeCommands[i])) {
+                    return -4;
+                }
+            } else if (curTarget == cT) {
+                if (curSrc == c13 && cmdBlocks13inT(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c14 && cmdBlocks14inT(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c15 && cmdBlocks15inT(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c16 && cmdBlocks16inT(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c17 && cmdBlocks17inT(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c18 && cmdBlocks18inT(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c19 && cmdBlocks19inT(activeCommands[i])) {
+                    return -4;
+                }
             }
         } else { // stelle merken an der noch platz ist 
             fullIdx = i;
@@ -332,6 +456,8 @@ int8_t CCommand::checkAndActivateNewCommand()
         return -3;
     } else if (curTarget == cN && getRailInputNbel()) {
         return -3;
+    // } else if (curTarget == cR && getRailInputRbel()) { AKTUELL keine belegt meldung
+    //     return -3;
     } else if (curTarget == cT && getRailInputTbel()) {
         return -3;
     }

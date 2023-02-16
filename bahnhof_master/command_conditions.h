@@ -44,6 +44,34 @@ bool is1To6(eRail r) {
     }
     return nok;
 }
+bool is1To11(eRail r) { 
+    bool nok = false;
+    if (r == c1) {
+        nok = true;
+    } else if (r == c2) {
+        nok = true;
+    } else if (r == c3) {
+        nok = true;
+    } else if (r == c4) {
+        nok = true;
+    } else if (r == c5) {
+        nok = true;
+    } else if (r == c6) {
+        nok = true;
+    } else if (r == c7) {
+        nok = true;
+    } else if (r == c8) {
+        nok = true;
+    } else if (r == c9) {
+        nok = true;
+    } else if (r == c10) {
+        nok = true;
+    } else if (r == c11) {
+        nok = true;
+    } 
+    return nok;
+}
+
 bool is1To19(eRail r) { 
     bool nok = false;
     if (r == c1) {
@@ -163,6 +191,1011 @@ bool is13To19(eRail r) {
 // conditions
 //=============================================================================
 
+//============================================================================
+// in1
+//============================================================================
+bool cmdBlocksCin1(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cD) { // alle Din..
+        nok = true;
+    } else if (cmd.target == cL) { // alle ..inL
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksDin1(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cC) { // alle Din..
+        nok = true;
+    } else if (cmd.target == cB) { // alle ..inB
+        nok = true;
+    } else if (cmd.target == cL) { // alle ..inL
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksHin1(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.target == cG) { // alle ..inG
+        nok = true;
+    }
+    return nok;
+}
+//============================================================================
+// in2
+//============================================================================
+bool cmdBlocksCin2(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cD) { // alle Din..
+        nok = true;
+    } else if (cmd.target == cA && cmd.src == c1) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB && cmd.src == c1) { // ..inB
+        nok = true;
+    } else if (cmd.target == cL) { // alle ..inL
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksDin2(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cC) { // alle Cin..
+        nok = true;
+    } else if (cmd.target == cA && cmd.src == c1) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB ) { // ..inB
+        nok = true;
+    } else if (cmd.target == cL) { // alle ..inL
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksHin2(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.target == cG && cmd.src != c1) { // alle ..inG ausser 1inG
+        nok = true;
+    }
+    return nok;
+}
+//============================================================================
+// in3
+//============================================================================
+bool cmdBlocksCin3(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cD) { // alle Din..
+        nok = true;
+    } else if (cmd.target == cA ) { // ..inA
+        if (cmd.src == c1) {
+            nok = true;
+        } else if (cmd.src == c2) {
+            nok = true;
+        }
+    } else if (cmd.target == cB ) { // ..inB
+        if (cmd.src == c1) {
+            nok = true;
+        } else if (cmd.src == c2) {
+            nok = true;
+        }
+    } else if (cmd.target == cL) { // alle ..inL
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksDin3(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cC) { // alle Cin..
+        nok = true;
+    } else if (cmd.target == cA) { // ..inA
+        if (cmd.src == c1) {
+            nok = true;
+        } else if (cmd.src == c2) {
+            nok = true;
+        }
+    } else if (cmd.target == cB ) { // ..inB
+        nok = true;
+    } else if (cmd.target == cL) { // alle ..inL
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksHin3(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.target == cG && cmd.src != c1 && cmd.src != c2) { // alle ..inG ausser 1inG
+        nok = true;
+    }
+    return nok;
+}
+//============================================================================
+// in4
+//============================================================================
+bool cmdBlocksCin4(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cD) { // alle Din..
+        nok = true;
+    } else if (cmd.target == cA ) { // ..inA
+        if (cmd.src == c1) {
+            nok = true;
+        } else if (cmd.src == c2) {
+            nok = true;
+        } else if (cmd.src == c3) {
+            nok = true;
+        }
+    } else if (cmd.target == cB ) { // ..inB
+        if (cmd.src == c1) {
+            nok = true;
+        } else if (cmd.src == c2) {
+            nok = true;
+        } else if (cmd.src == c3) {
+            nok = true;
+        }
+    } else if (cmd.target == cL) { // alle ..inL
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksDin4(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cC) { // alle Cin..
+        nok = true;
+    } else if (cmd.target == cA) { // ..inA
+        if (cmd.src == c1) {
+            nok = true;
+        } else if (cmd.src == c2) {
+            nok = true;
+        } else if (cmd.src == c3) {
+            nok = true;
+        }
+    } else if (cmd.target == cB ) { // ..inB
+        nok = true;
+    } else if (cmd.target == cL) { // alle ..inL
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksHin4(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.target == cG && is13To19(cmd.src)) { // alle ..inG ausser 1inG
+        nok = true;
+    }
+    return nok;
+}
+//============================================================================
+// in5
+//============================================================================
+bool cmdBlocksCin5(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cD) { // alle Din..
+        nok = true;
+    } else if (cmd.target == cA ) { // ..inA
+        if (cmd.src == c1) {
+            nok = true;
+        } else if (cmd.src == c2) {
+            nok = true;
+        } else if (cmd.src == c3) {
+            nok = true;
+        } else if (cmd.src == c4) {
+            nok = true;
+        }
+    } else if (cmd.target == cB ) { // ..inB
+        if (cmd.src == c1) {
+            nok = true;
+        } else if (cmd.src == c2) {
+            nok = true;
+        } else if (cmd.src == c3) {
+            nok = true;
+        } else if (cmd.src == c4) {
+            nok = true;
+        }
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksDin5(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cC) { // alle Cin..
+        nok = true;
+    } else if (cmd.target == cA) { // ..inA
+        if (cmd.src == c1) {
+            nok = true;
+        } else if (cmd.src == c2) {
+            nok = true;
+        } else if (cmd.src == c3) {
+            nok = true;
+        } else if (cmd.src == c4) {
+            nok = true;
+        }
+    } else if (cmd.target == cB ) { // ..inB
+        nok = true;
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksJin5(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.target == cF ) { // alle ..inF
+        nok = true;
+    } else if (cmd.target == cT ) { // alle ..inT
+        nok = true;
+    }
+    return nok;
+}
+//============================================================================
+// in6
+//============================================================================
+bool cmdBlocksCin6(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cD) { // alle Din..
+        nok = true;
+    } else if (cmd.target == cA ) { // ..inA
+        if (cmd.src == c1) {
+            nok = true;
+        } else if (cmd.src == c2) {
+            nok = true;
+        } else if (cmd.src == c3) {
+            nok = true;
+        } else if (cmd.src == c4) {
+            nok = true;
+        } else if (cmd.src == c5) {
+            nok = true;
+        }
+    } else if (cmd.target == cB ) { // ..inB
+        if (cmd.src == c1) {
+            nok = true;
+        } else if (cmd.src == c2) {
+            nok = true;
+        } else if (cmd.src == c3) {
+            nok = true;
+        } else if (cmd.src == c4) {
+            nok = true;
+        } else if (cmd.src == c5) {
+            nok = true;
+        }
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksDin6(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cC) { // alle Cin..
+        nok = true;
+    } else if (cmd.target == cA) { // ..inA
+        if (cmd.src == c1) {
+            nok = true;
+        } else if (cmd.src == c2) {
+            nok = true;
+        } else if (cmd.src == c3) {
+            nok = true;
+        } else if (cmd.src == c4) {
+            nok = true;
+        } else if (cmd.src == c5) {
+            nok = true;
+        }
+    } else if (cmd.target == cB ) { // ..inB
+        nok = true;
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksJin6(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.target == cF && cmd.src != c5) { // alle ..inF ausser
+        nok = true;
+    } else if (cmd.target == cT ) { // alle ..inT
+        nok = true;
+    }
+    return nok;
+}
+//============================================================================
+// in7
+//============================================================================
+bool cmdBlocksCin7(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cD) { // alle Din..
+        nok = true;
+    } else if (cmd.target == cA ) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB && is1To11(cmd.src)) { // ..inB
+        nok = true;
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksDin7(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cC) { // alle Cin..
+        nok = true;
+    } else if (cmd.target == cA) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB ) { // ..inB
+        nok = true;
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksJin7(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.target == cF && cmd.src != c5 && cmd.src != c6) { // alle ..inF ausser
+        nok = true;
+    } else if (cmd.target == cT ) { // alle ..inT
+        nok = true;
+    }
+    return nok;
+}
+//============================================================================
+// in8
+//============================================================================
+bool cmdBlocksCin8(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cD) { // alle Din..
+        nok = true;
+    } else if (cmd.target == cA ) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB && is1To11(cmd.src)) { // ..inB
+        nok = true;
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksDin8(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cC) { // alle Cin..
+        nok = true;
+    } else if (cmd.target == cA) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB ) { // ..inB
+        nok = true;
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksJin8(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.target == cF && cmd.src != c5 && cmd.src != c6 && cmd.src != c7) { // alle ..inF ausser
+        nok = true;
+    } else if (cmd.target == cT ) { // alle ..inT
+        nok = true;
+    }
+    return nok;
+}
+//============================================================================
+// in9
+//============================================================================
+bool cmdBlocksCin9(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cD) { // alle Din..
+        nok = true;
+    } else if (cmd.target == cA ) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB && is1To11(cmd.src)) { // ..inB
+        nok = true;
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksDin9(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cC) { // alle Cin..
+        nok = true;
+    } else if (cmd.target == cA) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB ) { // ..inB
+        nok = true;
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksJin9(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.target == cF && cmd.src != c5 && cmd.src != c6 && cmd.src != c7 && cmd.src != c8) { // alle ..inF ausser
+        nok = true;
+    } else if (cmd.target == cT ) { // alle ..inT
+        nok = true;
+    }
+    return nok;
+}
+//============================================================================
+// in10
+//============================================================================
+bool cmdBlocksCin10(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cD) { // alle Din..
+        nok = true;
+    } else if (cmd.target == cA ) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB && is1To11(cmd.src)) { // ..inB
+        nok = true;
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksDin10(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cC) { // alle Cin..
+        nok = true;
+    } else if (cmd.target == cA) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB ) { // ..inB
+        nok = true;
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksJin10(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.target == cF && cmd.src != c5 && cmd.src != c6 && cmd.src != c7 && cmd.src != c8) { // alle ..inF ausser
+        nok = true;
+    } else if (cmd.target == cT ) { // alle ..inT
+        nok = true;
+    }
+    return nok;
+}
+//============================================================================
+// in11
+//============================================================================
+bool cmdBlocksCin11(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cD) { // alle Din..
+        nok = true;
+    } else if (cmd.target == cA ) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB && is1To11(cmd.src)) { // ..inB
+        nok = true;
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksDin11(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cC) { // alle Cin..
+        nok = true;
+    } else if (cmd.target == cA) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB ) { // ..inB
+        nok = true;
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksJin11(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.target == cF && cmd.src != c5 && cmd.src != c6 && cmd.src != c7 && cmd.src != c8) { // alle ..inF ausser
+        nok = true;
+    } else if (cmd.target == cT ) { // alle ..inT
+        nok = true;
+    }
+    return nok;
+}
+//============================================================================
+// in12
+//============================================================================
+bool cmdBlocksKin12(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.target == cA && is13To19(cmd.src)) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB && is13To19(cmd.src)) { // ..inB
+        nok = true;
+    } else if (cmd.src == cC && is13To19(cmd.target)) {
+        nok = true;
+    } else if (cmd.src == cD && is13To19(cmd.target)) {
+        nok = true;
+    } else if (cmd.target == cL && cmd.src == c20) { // alle 20inL
+        nok = true;
+    } else if (cmd.src == cK ) { 
+        nok = true;
+    }
+    return nok;
+}
+//============================================================================
+// in13
+//============================================================================
+bool cmdBlocksCin13(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cD) { // alle Din..
+        nok = true;
+    } else if (cmd.target == cA ) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB) { // ..inB
+        nok = true;
+    } else if (cmd.src == cK) { // alle Kin.. 
+        nok = true;
+    } else if (cmd.target == cK && cmd.src != c14) { // alle ..inK ausser
+        nok = true;
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    } else if (cmd.target == cR ) { 
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksDin13(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cC) { // alle Cin..
+        nok = true;
+    } else if (cmd.target == cA) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB ) { // ..inB
+        nok = true;
+    } else if (cmd.src == cK) { 
+        nok = true;
+    } else if (cmd.target == cK && cmd.src != c14) { // alle ..inK ausser
+        nok = true;
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    } else if (cmd.src == cR) { 
+        nok = true;
+    } else if (cmd.target == cR) {
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksKin13(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.target == cA && is13To19(cmd.src)) { // alle ..inA
+        nok = true;
+    } else if (cmd.target == cB && is13To19(cmd.src)) { // alle ..inT
+        nok = true;
+    } else if (cmd.src == cC && is13To19(cmd.target)) { 
+        nok = true;
+    } else if (cmd.src == cD && is13To19(cmd.target)) { 
+        nok = true;
+    } else if (cmd.src == cR) { 
+        nok = true;
+    } else if (cmd.target == cL) { 
+        if (cmd.src == c12) {
+            nok = true;
+        } else if (cmd.src == c20) {
+            nok = true;
+        }
+    } else if (cmd.target == cR) { 
+        if (cmd.src == c13) {
+            nok = true;
+        } else if (cmd.src == c14) {
+            nok = true;
+        }
+    }
+    return nok;
+}
+bool cmdBlocksJin13(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.target == cG && is13To19(cmd.src)) { // alle ..inG
+        nok = true;
+    } else if (cmd.target == cT && is13To19(cmd.src)) { // alle ..inT
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksRin13(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.target == cA && is13To19(cmd.src)) { // alle ..inA
+        nok = true;
+    } else if (cmd.target == cB && is13To19(cmd.src)) { // alle ..inT
+        nok = true;
+    } else if (cmd.src == cC && is13To19(cmd.target)) { 
+        nok = true;
+    } else if (cmd.src == cD && is13To19(cmd.target)) { 
+        nok = true;
+    } else if (cmd.src == cR) { 
+        nok = true;
+    } else if (cmd.src == cK) { 
+        if (cmd.target == c14) {
+            nok = true;
+        }
+    } else if (cmd.target == cR) { 
+        if (cmd.src == c14) {
+            nok = true;
+        } else if (cmd.src == c20) {
+            nok = true;
+        }
+    } else if (cmd.target == cK) { 
+        if (cmd.src == c14) {
+            nok = true;
+        }
+    }
+    return nok;
+}
+
+//============================================================================
+// in14
+//============================================================================
+bool cmdBlocksCin14(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cD) { // alle Din..
+        nok = true;
+    } else if (cmd.target == cA ) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB) { // ..inB
+        nok = true;
+    } else if (cmd.src == cK) { // alle Kin.. 
+        nok = true;
+    } else if (cmd.target == cK && cmd.src != c14) { // alle ..inK ausser
+        nok = true;
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    } else if (cmd.target == cR ) { 
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksDin14(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cC) { // alle Cin..
+        nok = true;
+    } else if (cmd.target == cA) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB ) { // ..inB
+        nok = true;
+    } else if (cmd.src == cK) { 
+        nok = true;
+    } else if (cmd.target == cK && cmd.src != c14) { // alle ..inK ausser
+        nok = true;
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    } else if (cmd.src == cR) { 
+        nok = true;
+    } else if (cmd.target == cR) {
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksKin14(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.target == cA && is13To19(cmd.src)) { // alle ..inA
+        nok = true;
+    } else if (cmd.target == cB && is13To19(cmd.src)) { // alle ..inT
+        nok = true;
+    } else if (cmd.src == cC && is13To19(cmd.target)) { 
+        nok = true;
+    } else if (cmd.src == cD && is13To19(cmd.target)) { 
+        nok = true;
+    } else if (cmd.src == cR) { 
+        nok = true;
+    } else if (cmd.target == cL) { 
+        if (cmd.src == c12) {
+            nok = true;
+        } else if (cmd.src == c20) {
+            nok = true;
+        }
+    } else if (cmd.target == cR) { 
+        if (cmd.src == c13) {
+            nok = true;
+        } else if (cmd.src == c14) {
+            nok = true;
+        }
+    }
+    return nok;
+}
+bool cmdBlocksJin14(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.target == cG && is13To19(cmd.src)) { // alle ..inG
+        nok = true;
+    } else if (cmd.target == cT && is13To19(cmd.src)) { // alle ..inT
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksRin14(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.target == cA && is13To19(cmd.src)) { // alle ..inA
+        nok = true;
+    } else if (cmd.target == cB && is13To19(cmd.src)) { // alle ..inT
+        nok = true;
+    } else if (cmd.src == cC && is13To19(cmd.target)) { 
+        nok = true;
+    } else if (cmd.src == cD && is13To19(cmd.target)) { 
+        nok = true;
+    } else if (cmd.src == cR) { 
+        nok = true;
+    } else if (cmd.src == cK) { 
+        if (cmd.target == c13) {
+            nok = true;
+        }
+    } else if (cmd.target == cR) { 
+        if (cmd.src == c13) {
+            nok = true;
+        } else if (cmd.src == c20) {
+            nok = true;
+        }
+    } else if (cmd.target == cK) { 
+        if (cmd.src == c13) {
+            nok = true;
+        }
+    }
+    return nok;
+}
+//============================================================================
+// in15
+//============================================================================
+bool cmdBlocksCin15(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cD) { // alle Din..
+        nok = true;
+    } else if (cmd.target == cA ) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB) { // ..inB
+        nok = true;
+    } else if (cmd.src == cK) { // alle Kin.. 
+        nok = true;
+    } else if (cmd.target == cK && cmd.src != c14) { // alle ..inK ausser
+        nok = true;
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    } else if (cmd.target == cR ) { 
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksDin15(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cC) { // alle Cin..
+        nok = true;
+    } else if (cmd.target == cA) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB ) { // ..inB
+        nok = true;
+    } else if (cmd.src == cK) { 
+        nok = true;
+    } else if (cmd.target == cK && cmd.src != c14) { // alle ..inK ausser
+        nok = true;
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    } else if (cmd.src == cR) { 
+        nok = true;
+    } else if (cmd.target == cR) {
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksJin15(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.target == cG && is13To19(cmd.src)) { // alle ..inG
+        nok = true;
+    } else if (cmd.target == cT && is13To19(cmd.src)) { // alle ..inT
+        nok = true;
+    }
+    return nok;
+}
+//============================================================================
+// in16
+//============================================================================
+bool cmdBlocksCin16(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cD) { // alle Din..
+        nok = true;
+    } else if (cmd.target == cA ) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB) { // ..inB
+        nok = true;
+    } else if (cmd.src == cK) { // alle Kin.. 
+        nok = true;
+    } else if (cmd.target == cK && cmd.src != c14) { // alle ..inK ausser
+        nok = true;
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    } else if (cmd.target == cR ) { 
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksDin16(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cC) { // alle Cin..
+        nok = true;
+    } else if (cmd.target == cA) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB ) { // ..inB
+        nok = true;
+    } else if (cmd.src == cK) { 
+        nok = true;
+    } else if (cmd.target == cK && cmd.src != c14) { // alle ..inK ausser
+        nok = true;
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    } else if (cmd.src == cR) { 
+        nok = true;
+    } else if (cmd.target == cR) {
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksJin16(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.target == cG && is13To19(cmd.src)) { // alle ..inG
+        nok = true;
+    } else if (cmd.target == cT && is13To19(cmd.src)) { // alle ..inT
+        nok = true;
+    }
+    return nok;
+}
+//============================================================================
+// in17
+//============================================================================
+bool cmdBlocksCin17(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cD) { // alle Din..
+        nok = true;
+    } else if (cmd.target == cA ) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB) { // ..inB
+        nok = true;
+    } else if (cmd.src == cK) { // alle Kin.. 
+        nok = true;
+    } else if (cmd.target == cK && cmd.src != c14) { // alle ..inK ausser
+        nok = true;
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    } else if (cmd.target == cR ) { 
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksDin17(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cC) { // alle Cin..
+        nok = true;
+    } else if (cmd.target == cA) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB ) { // ..inB
+        nok = true;
+    } else if (cmd.src == cK) { 
+        nok = true;
+    } else if (cmd.target == cK && cmd.src != c14) { // alle ..inK ausser
+        nok = true;
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    } else if (cmd.src == cR) { 
+        nok = true;
+    } else if (cmd.target == cR) {
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksJin17(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.target == cG && is13To19(cmd.src)) { // alle ..inG
+        nok = true;
+    } else if (cmd.target == cT && is13To19(cmd.src)) { // alle ..inT
+        nok = true;
+    }
+    return nok;
+}
+//============================================================================
+// in18
+//============================================================================
+bool cmdBlocksCin18(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cD) { // alle Din..
+        nok = true;
+    } else if (cmd.target == cA ) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB) { // ..inB
+        nok = true;
+    } else if (cmd.src == cK) { // alle Kin.. 
+        nok = true;
+    } else if (cmd.target == cK && cmd.src != c14) { // alle ..inK ausser
+        nok = true;
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    } else if (cmd.target == cR ) { 
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksDin18(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cC) { // alle Cin..
+        nok = true;
+    } else if (cmd.target == cA) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB ) { // ..inB
+        nok = true;
+    } else if (cmd.src == cK) { 
+        nok = true;
+    } else if (cmd.target == cK && cmd.src != c14) { // alle ..inK ausser
+        nok = true;
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    } else if (cmd.src == cR) { 
+        nok = true;
+    } else if (cmd.target == cR) {
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksJin18(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.target == cG && is13To19(cmd.src)) { // alle ..inG
+        nok = true;
+    } else if (cmd.target == cT && is13To19(cmd.src)) { // alle ..inT
+        nok = true;
+    }
+    return nok;
+}
+//============================================================================
+// in19
+//============================================================================
+bool cmdBlocksCin19(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cD) { // alle Din..
+        nok = true;
+    } else if (cmd.target == cA ) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB) { // ..inB
+        nok = true;
+    } else if (cmd.src == cK) { // alle Kin.. 
+        nok = true;
+    } else if (cmd.target == cK && cmd.src != c14) { // alle ..inK ausser
+        nok = true;
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    } else if (cmd.target == cR ) { 
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksDin19(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.src == cC) { // alle Cin..
+        nok = true;
+    } else if (cmd.target == cA) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB ) { // ..inB
+        nok = true;
+    } else if (cmd.src == cK) { 
+        nok = true;
+    } else if (cmd.target == cK && cmd.src != c14) { // alle ..inK ausser
+        nok = true;
+    } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
+        nok = true;
+    } else if (cmd.src == cR) { 
+        nok = true;
+    } else if (cmd.target == cR) {
+        nok = true;
+    }
+    return nok;
+}
+bool cmdBlocksJin19(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.target == cG && is13To19(cmd.src)) { // alle ..inG
+        nok = true;
+    } else if (cmd.target == cT && is13To19(cmd.src)) { // alle ..inT
+        nok = true;
+    }
+    return nok;
+}
+//============================================================================
+// in20
+//============================================================================
+bool cmdBlocksKin20(const commandStruct &cmd) {
+    bool nok = false; // also ok = default
+    if (cmd.target == cA && is13To19(cmd.src)) { // ..inA
+        nok = true;
+    } else if (cmd.target == cB && is13To19(cmd.src)) { // ..inB
+        nok = true;
+    } else if (cmd.src == cC && is13To19(cmd.target)) {
+        nok = true;
+    } else if (cmd.src == cD && is13To19(cmd.target)) {
+        nok = true;
+    } else if (cmd.target == cL && cmd.src == c12) { //  12inL
+        nok = true;
+    } else if (cmd.src == cK ) { 
+        nok = true;
+    }
+    return nok;
+}
 //============================================================================
 // inA
 //============================================================================

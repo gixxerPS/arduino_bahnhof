@@ -232,6 +232,166 @@ int8_t CCommand::checkAndActivateNewCommand()
 
             if (cmdBlocksCurSrcTarget(activeCommands[i])) { // curSrc ODER curTarget bereits im Einsatz ?
                 return -4;
+            } else if (curTarget == c1) {
+                if (curSrc == cC && cmdBlocksCin1(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cD && cmdBlocksDin1(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cH && cmdBlocksHin1(activeCommands[i])) {
+                    return -4;
+                }
+            } else if (curTarget == c2) {
+                if (curSrc == cC && cmdBlocksCin2(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cD && cmdBlocksDin2(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cH && cmdBlocksHin2(activeCommands[i])) {
+                    return -4;
+                }
+            } else if (curTarget == c3) {
+                if (curSrc == cC && cmdBlocksCin3(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cD && cmdBlocksDin3(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cH && cmdBlocksHin3(activeCommands[i])) {
+                    return -4;
+                }
+            } else if (curTarget == c4) {
+                if (curSrc == cC && cmdBlocksCin4(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cD && cmdBlocksDin4(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cH && cmdBlocksHin4(activeCommands[i])) {
+                    return -4;
+                }
+            } else if (curTarget == c5) {
+                if (curSrc == cC && cmdBlocksCin5(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cD && cmdBlocksDin5(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cJ && cmdBlocksJin5(activeCommands[i])) {
+                    return -4;
+                }
+            } else if (curTarget == c6) {
+                if (curSrc == cC && cmdBlocksCin6(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cD && cmdBlocksDin6(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cJ && cmdBlocksJin6(activeCommands[i])) {
+                    return -4;
+                }
+            } else if (curTarget == c7) {
+                if (curSrc == cC && cmdBlocksCin7(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cD && cmdBlocksDin7(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cJ && cmdBlocksJin7(activeCommands[i])) {
+                    return -4;
+                }
+            } else if (curTarget == c8) {
+                if (curSrc == cC && cmdBlocksCin8(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cD && cmdBlocksDin8(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cJ && cmdBlocksJin8(activeCommands[i])) {
+                    return -4;
+                }
+            } else if (curTarget == c9) {
+                if (curSrc == cC && cmdBlocksCin9(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cD && cmdBlocksDin9(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cJ && cmdBlocksJin9(activeCommands[i])) {
+                    return -4;
+                }
+            } else if (curTarget == c10) {
+                if (curSrc == cC && cmdBlocksCin10(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cD && cmdBlocksDin10(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cJ && cmdBlocksJin10(activeCommands[i])) {
+                    return -4;
+                }
+            } else if (curTarget == c11) {
+                if (curSrc == cC && cmdBlocksCin11(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cD && cmdBlocksDin11(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cJ && cmdBlocksJin11(activeCommands[i])) {
+                    return -4;
+                }
+            } else if (curTarget == c12) {
+                if (curSrc == cK && cmdBlocksKin12(activeCommands[i])) {
+                    return -4;
+                }
+            } else if (curTarget == c13) {
+                if (curSrc == cC && cmdBlocksCin13(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cD && cmdBlocksDin13(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cK && cmdBlocksKin13(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cJ && cmdBlocksJin13(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cR && cmdBlocksRin13(activeCommands[i])) {
+                    return -4;
+                }
+            } else if (curTarget == c14) {
+                if (curSrc == cC && cmdBlocksCin14(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cD && cmdBlocksDin14(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cK && cmdBlocksKin14(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cJ && cmdBlocksJin14(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cR && cmdBlocksRin14(activeCommands[i])) {
+                    return -4;
+                }
+            } else if (curTarget == c15) {
+                if (curSrc == cC && cmdBlocksCin15(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cD && cmdBlocksDin15(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cJ && cmdBlocksJin15(activeCommands[i])) {
+                    return -4;
+                }
+            } else if (curTarget == c16) {
+                if (curSrc == cC && cmdBlocksCin16(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cD && cmdBlocksDin16(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cJ && cmdBlocksJin16(activeCommands[i])) {
+                    return -4;
+                }
+            } else if (curTarget == c17) {
+                if (curSrc == cC && cmdBlocksCin17(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cD && cmdBlocksDin17(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cJ && cmdBlocksJin17(activeCommands[i])) {
+                    return -4;
+                }
+            } else if (curTarget == c18) {
+                if (curSrc == cC && cmdBlocksCin18(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cD && cmdBlocksDin18(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cJ && cmdBlocksJin18(activeCommands[i])) {
+                    return -4;
+                }
+            } else if (curTarget == c19) {
+                if (curSrc == cC && cmdBlocksCin19(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cD && cmdBlocksDin19(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cJ && cmdBlocksJin19(activeCommands[i])) {
+                    return -4;
+                }
+            } else if (curTarget == c20) {
+                if (curSrc == cK && cmdBlocksKin20(activeCommands[i])) {
+                    return -4;
+                }
             } else if (curTarget == cA) {
                 if (curSrc == c1 && cmdBlocks1inA(activeCommands[i])) {
                     return -4;

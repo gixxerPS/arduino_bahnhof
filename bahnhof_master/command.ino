@@ -5,9 +5,9 @@ void CCommand::setCmdInput1_32(eRail cmdIn, bool val)
 {
     uint8_t offs = cmdIn % 32; // z.B. 34%32 = 2 | 8%32 = 8
     if (val) {
-        cmdInputs1_32 |= (1<<offs);
+        cmdInputs1_32 |= ((uint32_t)1<<offs);
     } else {
-        cmdInputs1_32 &= ~(1<<offs);
+        cmdInputs1_32 &= ~((uint32_t)1<<offs);
     }
 }
 
@@ -15,9 +15,9 @@ void CCommand::setCmdInputA_Z(eRail cmdIn, bool val)
 {
     uint8_t offs = (cmdIn-32) % 32; // z.B. 34%32 = 2 | 8%32 = 8
     if (val) {
-        cmdInputsA_Z |= (1<<offs);
+        cmdInputsA_Z |= ((uint32_t)1<<offs);
     } else {
-        cmdInputsA_Z &= ~(1<<offs);
+        cmdInputsA_Z &= ~((uint32_t)1<<offs);
     }
 }
 
@@ -83,39 +83,40 @@ eCMD CCommand::mapSrcTarget2Cmd(eRail src, eRail target) {
         else if (target == cG) {ret = i13_IN_G;}
         else if (target == cK) {ret = i13_IN_K;}
         else if (target == cR) {ret = i13_IN_R;}
-        else if (target == cT) {ret = i13_IN_T;}
+        else if (target == cF) {ret = i13_IN_T;}
     } else if (src == c14) { // 14in...
         if (target == cA) {ret = i14_IN_A;}
         else if (target == cB) {ret = i14_IN_B;}
         else if (target == cG) {ret = i14_IN_G;}
         else if (target == cK) {ret = i14_IN_K;}
         else if (target == cR) {ret = i14_IN_R;}
-        else if (target == cT) {ret = i14_IN_T;}
+        else if (target == cF) {ret = i14_IN_T;}
     } else if (src == c15) { // 15in...
         if (target == cA) {ret = i15_IN_A;}
         else if (target == cB) {ret = i15_IN_B;}
         else if (target == cG) {ret = i15_IN_G;}
-        else if (target == cT) {ret = i15_IN_T;}
+        else if (target == cF) {ret = i15_IN_T;}
     } else if (src == c16) { // 16in...
         if (target == cA) {ret = i16_IN_A;}
         else if (target == cB) {ret = i16_IN_B;}
         else if (target == cG) {ret = i16_IN_G;}
+        else if (target == cF) {ret = i16_IN_T;}
     } else if (src == c17) { // 17in...
         if (target == cA) {ret = i17_IN_A;}
         else if (target == cB) {ret = i17_IN_B;}
         else if (target == cG) {ret = i17_IN_G;}
-        else if (target == cT) {ret = i17_IN_T;}
+        else if (target == cF) {ret = i17_IN_T;}
     } else if (src == c18) { // 18in...
         if (target == cA) {ret = i18_IN_A;}
         else if (target == cB) {ret = i18_IN_B;}
         else if (target == cG) {ret = i18_IN_G;}
-        else if (target == cT) {ret = i18_IN_T;}
+        else if (target == cF) {ret = i18_IN_T;}
     } else if (src == c19) { // 19in...
         if (target == cA) {ret = i19_IN_A;}
         else if (target == cB) {ret = i19_IN_B;}
         else if (target == cG) {ret = i19_IN_G;}
         else if (target == cM) {ret = i19_IN_M;}
-        else if (target == cT) {ret = i19_IN_T;}
+        else if (target == cF) {ret = i19_IN_T;}
     } else if (src == c20) { // 20in...
         if (target == cK) {ret = i20_IN_K;}
         else if (target == cL) {ret = i20_IN_L;}
@@ -846,17 +847,16 @@ void CCommand::checkAndFinishRunningCommand()
     for (int i = N_COMMANDS - 1; i >= 0; i--) { // wg fullIdx rueckwaerts damit letzte freie stelle kleinsten idx im auftrags array bekommt
         if (activeCommands[i].active) {
             activeCount++;
-            COMMAND_DEBUG_PRINT("check active[");
-            COMMAND_DEBUG_PRINT(i);
-            COMMAND_DEBUG_PRINT("]: src=");
-            COMMAND_DEBUG_PRINT(activeCommands[i].src);
-            COMMAND_DEBUG_PRINT(" target=");
-            COMMAND_DEBUG_PRINTLN(activeCommands[i].target);
+            // COMMAND_DEBUG_PRINT("check active[");
+            // COMMAND_DEBUG_PRINT(i);
+            // COMMAND_DEBUG_PRINT("]: src=");
+            // COMMAND_DEBUG_PRINT(activeCommands[i].src);
+            // COMMAND_DEBUG_PRINT(" target=");
+            // COMMAND_DEBUG_PRINTLN(activeCommands[i].target);
             if (activeCommands[i].target == c1 ) {
                 if (activeCommands[i].src == cN || activeCommands[i].src == cH) {
                     if (getRailInput1re()) {finishCmd(activeCommands[i]);}
                 } else {
-                    COMMAND_DEBUG_PRINT("check 1li");
                     if (getRailInput1li()) {finishCmd(activeCommands[i]);}
                 }
             } else if (activeCommands[i].target == c2) {

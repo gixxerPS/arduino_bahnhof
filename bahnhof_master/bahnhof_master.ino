@@ -30,7 +30,6 @@
  * JD-VCC, GND = Last 5V versorgung fuer relais => 2. netzteil
  * VCC, GND = Steuerspannung
  */
-#include <LiquidCrystal.h>
 #include <Wire.h>
 
 #include "pcf8575Handling.h"
@@ -38,8 +37,7 @@
 #include "command.h"
 #include "rxtx.h"
 #include "digitalInputs.h"
-String hw = "hello world";
-static bool relaisStatus;
+
 #define N_LOOP_AVG 9 // N-1 => N_LOOP_AVG=9  bedeutet N = 10!
 #define PRINT_LOOP_INTERVAL 5000 // [ms] alle n ms zykluszeit seriell ausgeben 
 
@@ -70,6 +68,8 @@ void setCin6(uint8_t val) {bitWrite(rawOutputsSlave2[0], 7, val);};
 void setDin18(uint8_t val) {bitWrite(rawOutputsSlave2[0], 0, val);};
 void setDin19(uint8_t val) {bitWrite(rawOutputsSlave2[0], 1, val);};
 void set11inF(uint8_t val) {bitWrite(rawOutputsSlave2[1], 6, val);};
+void set13inF(uint8_t val) {bitWrite(rawOutputsSlave2[1], 3, val);};
+void set14inF(uint8_t val) {bitWrite(rawOutputsSlave2[1], 0, val);};
 void set13inG(uint8_t val) {bitWrite(rawOutputsSlave2[3], 5, val);};
 void set14inG(uint8_t val) {bitWrite(rawOutputsSlave2[3], 4, val);};
 void set15inG(uint8_t val) {bitWrite(rawOutputsSlave2[3], 3, val);};
@@ -103,7 +103,7 @@ CCommand::setOut[CCommand::i10_IN_A] = &MY_PCF8575::set10inA;
 CCommand::setOut[CCommand::i11_IN_A] = &MY_PCF8575::set11inA;
 CCommand::setOut[CCommand::i12_IN_A] = &setEmpty;
 CCommand::setOut[CCommand::i13_IN_A] = &set13inA;
-CCommand::setOut[CCommand::i14_IN_A] = &setEmpty;
+CCommand::setOut[CCommand::i14_IN_A] = &set14inA;
 CCommand::setOut[CCommand::i15_IN_A] = &MY_PCF8575::set15inA;
 CCommand::setOut[CCommand::i16_IN_A] = &MY_PCF8575::set16inA;
 CCommand::setOut[CCommand::i17_IN_A] = &MY_PCF8575::set17inA;
@@ -174,13 +174,13 @@ CCommand::setOut[CCommand::i9_IN_F] = &MY_PCF8575::set9inF;
 CCommand::setOut[CCommand::i10_IN_F] = &MY_PCF8575::set10inF;
 CCommand::setOut[CCommand::i11_IN_F] = &set11inF;
 CCommand::setOut[CCommand::i12_IN_T] = &setEmpty;
-CCommand::setOut[CCommand::i13_IN_T] = &setEmpty;
-CCommand::setOut[CCommand::i14_IN_T] = &setEmpty;
-CCommand::setOut[CCommand::i15_IN_T] = &setEmpty;
-CCommand::setOut[CCommand::i16_IN_T] = &setEmpty;
-CCommand::setOut[CCommand::i17_IN_T] = &setEmpty;
-CCommand::setOut[CCommand::i18_IN_T] = &setEmpty;
-CCommand::setOut[CCommand::i19_IN_T] = &setEmpty;
+CCommand::setOut[CCommand::i13_IN_T] = &set13inF;
+CCommand::setOut[CCommand::i14_IN_T] = &set14inF;
+CCommand::setOut[CCommand::i15_IN_T] = &MY_PCF8575::set15inF;
+CCommand::setOut[CCommand::i16_IN_T] = &MY_PCF8575::set16inF;
+CCommand::setOut[CCommand::i17_IN_T] = &MY_PCF8575::set17inF;
+CCommand::setOut[CCommand::i18_IN_T] = &MY_PCF8575::set18inF;
+CCommand::setOut[CCommand::i19_IN_T] = &MY_PCF8575::set19inF;
 CCommand::setOut[CCommand::i1_IN_G] = &MY_PCF8575::set1inG;
 CCommand::setOut[CCommand::i2_IN_G] = &MY_PCF8575::set2inG;
 CCommand::setOut[CCommand::i3_IN_G] = &MY_PCF8575::set3inG;
@@ -195,11 +195,11 @@ CCommand::setOut[CCommand::i19_IN_G] = &MY_PCF8575::set19inG;
 CCommand::setOut[CCommand::iH_IN_1] = &MY_PCF8575::setHin1;
 CCommand::setOut[CCommand::iH_IN_2] = &MY_PCF8575::setHin2;
 CCommand::setOut[CCommand::iH_IN_3] = &MY_PCF8575::setHin3;
-CCommand::setOut[CCommand::iH_IN_4] = &setEmpty;
+CCommand::setOut[CCommand::iH_IN_4] = &MY_PCF8575::setHin4;
 CCommand::setOut[CCommand::iJ_IN_5] = &MY_PCF8575::setJin5;
 CCommand::setOut[CCommand::iJ_IN_6] = &MY_PCF8575::setJin6;
 CCommand::setOut[CCommand::iJ_IN_7] = &MY_PCF8575::setJin7;
-CCommand::setOut[CCommand::iJ_IN_8] = &setEmpty;
+CCommand::setOut[CCommand::iJ_IN_8] = &MY_PCF8575::setJin8;
 CCommand::setOut[CCommand::iJ_IN_9] = &setJin9;
 CCommand::setOut[CCommand::iJ_IN_10] = &setJin10;
 CCommand::setOut[CCommand::iJ_IN_11] = &setJin11;
@@ -212,23 +212,23 @@ CCommand::setOut[CCommand::iJ_IN_17] = &setJin17;
 CCommand::setOut[CCommand::iJ_IN_18] = &setJin18;
 CCommand::setOut[CCommand::iJ_IN_19] = &setJin19;
 CCommand::setOut[CCommand::i12_IN_K] = &MY_PCF8575::set12inK;
-CCommand::setOut[CCommand::i20_IN_K] = &setEmpty;
-CCommand::setOut[CCommand::i13_IN_K] = &setEmpty;
-CCommand::setOut[CCommand::i14_IN_K] = &setEmpty;
-CCommand::setOut[CCommand::i4_IN_L] = &setEmpty;
-CCommand::setOut[CCommand::i6_IN_L] = &setEmpty;
-CCommand::setOut[CCommand::i8_IN_L] = &setEmpty;
-CCommand::setOut[CCommand::i9_IN_L] = &setEmpty;
-CCommand::setOut[CCommand::i12_IN_L] = &setEmpty;
-CCommand::setOut[CCommand::i20_IN_L] = &setEmpty;
-CCommand::setOut[CCommand::i13_IN_R] = &setEmpty;
-CCommand::setOut[CCommand::i14_IN_R] = &setEmpty;
-CCommand::setOut[CCommand::iK_IN_12] = &setEmpty;
-CCommand::setOut[CCommand::iK_IN_20] = &setEmpty;
-CCommand::setOut[CCommand::iK_IN_13] = &setEmpty;
-CCommand::setOut[CCommand::iK_IN_14] = &setEmpty;
-CCommand::setOut[CCommand::iR_IN_13] = &setEmpty;
-CCommand::setOut[CCommand::iR_IN_14] = &setEmpty;
+CCommand::setOut[CCommand::i20_IN_K] = &MY_PCF8575::set20inK;
+CCommand::setOut[CCommand::i13_IN_K] = &MY_PCF8575::set13inK;
+CCommand::setOut[CCommand::i14_IN_K] = &MY_PCF8575::set14inK;
+CCommand::setOut[CCommand::i4_IN_L] = &MY_PCF8575::set4inL;
+CCommand::setOut[CCommand::i6_IN_L] = &MY_PCF8575::set6inL;
+CCommand::setOut[CCommand::i8_IN_L] = &MY_PCF8575::set8inL;
+CCommand::setOut[CCommand::i9_IN_L] = &MY_PCF8575::set9inL;
+CCommand::setOut[CCommand::i12_IN_L] = &MY_PCF8575::set12inL;
+CCommand::setOut[CCommand::i20_IN_L] = &MY_PCF8575::set20inL;
+CCommand::setOut[CCommand::i13_IN_R] = &MY_PCF8575::set13inR;
+CCommand::setOut[CCommand::i14_IN_R] = &MY_PCF8575::set14inR;
+CCommand::setOut[CCommand::iK_IN_12] = &MY_PCF8575::setKin12;
+CCommand::setOut[CCommand::iK_IN_20] = &MY_PCF8575::setKin20;
+CCommand::setOut[CCommand::iK_IN_13] = &MY_PCF8575::setKin13;
+CCommand::setOut[CCommand::iK_IN_14] = &MY_PCF8575::setKin14;
+CCommand::setOut[CCommand::iR_IN_13] = &MY_PCF8575::setRin13;
+CCommand::setOut[CCommand::iR_IN_14] = &MY_PCF8575::setRin14;
 CCommand::setOut[CCommand::i19_IN_M] = &MY_PCF8575::set19inM;
 CCommand::setOut[CCommand::iM_IN_19] = &MY_PCF8575::setMin19;
 CCommand::setOut[CCommand::iP_IN_12] = &setEmpty;
@@ -239,9 +239,9 @@ CCommand::setOut[CCommand::iN_IN_1] = &MY_PCF8575::setNin1;
 void printInputs()
 {
   static unsigned long lastTXTime;
-  if (millis() - lastTXTime > 10000) {
+  if (millis() - lastTXTime > 4000) {
     lastTXTime = millis();
-    Serial.print("Eingangsstati master >>>>>>>>>>>>>>>>>>>>");
+    Serial.print("Eingangsstati master >>>>");
     for (int i = 0; i < RX_SLAVE_BYTE_CNT; i++) {
       Serial.print(" | byte ");
       Serial.print(i);
@@ -249,7 +249,7 @@ void printInputs()
       Serial.print(DI::rawInputsSlave1[i], HEX);
     }
     Serial.println();
-    Serial.print("Eingangsstati slave2 >>>>>>>>>>>>>>>>>>>>");
+    Serial.print("Eingangsstati slave2 >>>>");
     for (int i = 0; i < RX_SLAVE_BYTE_CNT; i++) {
       Serial.print(" | byte ");
       Serial.print(i);
@@ -301,7 +301,6 @@ void evalAndPrintLoopTime () {
 
 void setup()
 {
-  pinMode(LED_BUILTIN, OUTPUT);
   Serial.begin(9600);
   Serial.println(">>>>>>>>>>>>>>>>>>>>>>> Bahnhof Master <<<<<<<<<<<<<<<<<<<");
   MYLCD::setup();
@@ -379,11 +378,12 @@ void loop()
         duration = millis() - msStart;
         if (RXTX::getTotalRxMsgCnt() > oldRxMsgCnt) { 
           oldRxMsgCnt = totalMsgCnt;
-          if (totalMsgCnt % 2) { // led bei jeder 2. nachricht togglen => ja er lebt noch
-            digitalWrite(LED_BUILTIN, HIGH);
-          } else {
-            digitalWrite(LED_BUILTIN, LOW);
-          }
+          // togglen geht nicht weil mit eingang belegt !!!
+          // if (totalMsgCnt % 2) { // led bei jeder 2. nachricht togglen => ja er lebt noch
+          //   digitalWrite(LED_BUILTIN, HIGH);
+          // } else {
+          //   digitalWrite(LED_BUILTIN, LOW);
+          // }
           // Serial.print("Dauer [ms]: ");
           // Serial.print(duration);
           // Serial.print(". Anzahl Nachrichten empfangen gesamt = ");
@@ -412,7 +412,7 @@ void loop()
         CCommand::setCmdInput1_32( CCommand:: c9, DI::rawInputsSlave1[4] & (1<<6) );
         CCommand::setCmdInput1_32( CCommand::c10, DI::rawInputsSlave1[4] & (1<<7) );
         CCommand::setCmdInput1_32( CCommand::c11, DI::rawInputsSlave1[5] & (1<<0) );
-        CCommand::setCmdInput1_32( CCommand::c12, DI::rawInputsSlave1[5] & (1<<1) );
+        CCommand::setCmdInput1_32( CCommand::c12, DI::rawInputsSlave1[7] & (1<<1) );
         CCommand::setCmdInput1_32( CCommand::c13, DI::rawInputsSlave1[5] & (1<<2) );
         CCommand::setCmdInput1_32( CCommand::c14, DI::rawInputsSlave1[5] & (1<<3) );
         CCommand::setCmdInput1_32( CCommand::c15, DI::rawInputsSlave1[5] & (1<<4) );
@@ -420,6 +420,7 @@ void loop()
         CCommand::setCmdInput1_32( CCommand::c17, DI::rawInputsSlave1[2] & (1<<6) );
         CCommand::setCmdInput1_32( CCommand::c18, DI::rawInputsSlave1[2] & (1<<7) );
         CCommand::setCmdInput1_32( CCommand::c19, DI::rawInputsSlave1[2] & (1<<4) );
+        CCommand::setCmdInput1_32( CCommand::c20, DI::rawInputsSlave1[5] & (1<<1) );
 
         CCommand::setCmdInputA_Z( CCommand::cA, rawInputsSlave2[0] & (1<<1) );
         CCommand::setCmdInputA_Z( CCommand::cB, rawInputsSlave2[0] & (1<<0) );
@@ -429,10 +430,10 @@ void loop()
         CCommand::setCmdInputA_Z( CCommand::cG, rawInputsSlave2[3] & (1<<0) );
         CCommand::setCmdInputA_Z( CCommand::cH, rawInputsSlave2[2] & (1<<7) );
         CCommand::setCmdInputA_Z( CCommand::cJ, rawInputsSlave2[2] & (1<<6) );
-        CCommand::setCmdInputA_Z( CCommand::cK, rawInputsSlave2[2] & (1<<5) );
-        CCommand::setCmdInputA_Z( CCommand::cL, rawInputsSlave2[2] & (1<<4) );
+        CCommand::setCmdInputA_Z( CCommand::cK, rawInputsSlave2[2] & (1<<4) );
+        CCommand::setCmdInputA_Z( CCommand::cL, rawInputsSlave2[2] & (1<<5) );
         CCommand::setCmdInputA_Z( CCommand::cM, rawInputsSlave2[2] & (1<<3) );
-        CCommand::setCmdInputA_Z( CCommand::cN, 0/*rawInputsSlave2[3] & (1<<6) */); // fehlt ???
+        CCommand::setCmdInputA_Z( CCommand::cN, DI::rawInputsSlave1[3] & (1<<5) ); 
         CCommand::setCmdInputA_Z( CCommand::cR, rawInputsSlave2[1] & (1<<2) );
         CCommand::setCmdInputA_Z( CCommand::cS, 0/*rawInputsSlave2[4] & (1<<0) */); // fehlt ???
         CCommand::setCmdInputA_Z( CCommand::cT, 0/*rawInputsSlave2[4] & (1<<1) */); // fehlt ???
@@ -473,7 +474,7 @@ void loop()
         CCommand::setRailInput11bel(DI::rawInputsSlave1[1] & (1<<0));
         CCommand::setRailInput12li (rawInputsSlave2[4] & (1<<5));
         CCommand::setRailInput12re (DI::rawInputsSlave1[7] & (1<<1));
-        CCommand::setRailInput12bel(DI::rawInputsSlave1[1] & (1<<1));
+        CCommand::setRailInput12bel(0/*DI::rawInputsSlave1[1] & (1<<1)*/);
         CCommand::setRailInput13li (rawInputsSlave2[4] & (1<<6));
         CCommand::setRailInput13re (DI::rawInputsSlave1[7] & (1<<2));
         CCommand::setRailInput13bel(DI::rawInputsSlave1[0] & (1<<6));
@@ -502,13 +503,13 @@ void loop()
         
         CCommand::setRailInputAbel(rawInputsSlave2[1] & (1<<5));
         CCommand::setRailInputKre (rawInputsSlave2[1] & (1<<1));
-        CCommand::setRailInputKbel(rawInputsSlave2[1] & (1<<3));
+        CCommand::setRailInputBbel(rawInputsSlave2[1] & (1<<4));
         CCommand::setRailInputKbel(rawInputsSlave2[1] & (1<<3));
         CCommand::setRailInputLbel(rawInputsSlave2[1] & (1<<7));
         CCommand::setRailInputGbel(rawInputsSlave2[2] & (1<<2));
-        CCommand::setRailInputFbel(rawInputsSlave2[2] & (1<<1));
+        CCommand::setRailInputFbel(rawInputsSlave2[4] & (1<<5));
         CCommand::setRailInputNbel(rawInputsSlave2[1] & (1<<6));
-        CCommand::setRailInputTbel(rawInputsSlave2[1] & (1<<5)); // TODO: pruefen!!! welcher eingang ist es?
+        CCommand::setRailInputTbel(rawInputsSlave2[2] & (1<<1));
         loopStateNext = 50;
         break;
 
@@ -599,10 +600,25 @@ void loop()
         Serial.print(CCommand::activeCommands[i].src);
         Serial.print(" -> ");
         Serial.print(CCommand::activeCommands[i].target);
-        Serial.print(" | ");
+        Serial.print("(");
+        Serial.print(MYLCD::railCombiEnum2Str(CCommand::activeCommands[i].railCombi)); 
+        Serial.print(") | ");
       }
     }
     Serial.println();
+    
+    Serial.print("cmdInputs1_32: ");
+    Serial.print(CCommand::cmdInputs1_32, HEX);
+
+    Serial.print(" | cmdInputsA_Z: ");
+    Serial.print(CCommand::cmdInputsA_Z, HEX);
+
+    Serial.print(" | curSrc: ");
+    Serial.print(CCommand::curSrc);
+    
+    Serial.print(" | curTarget: ");
+    Serial.println(CCommand::curTarget);
+
   }
   printInputs();
 }

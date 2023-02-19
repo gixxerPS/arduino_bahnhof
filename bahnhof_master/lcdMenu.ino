@@ -2,49 +2,7 @@
 
 using namespace MYLCD;
 
-
-
-// int Tasterstatus()
-// {
-//     Analogwert = analogRead(A0); // Auslesen der Taster am Analogen Pin A0.
-//     if (Analogwert > 1000)
-//         return KeinTaster;
-//     if (Analogwert < 50)
-//         return Tasterrechts;
-//     if (Analogwert < 195)
-//         return Tasteroben;
-//     if (Analogwert < 380)
-//         return Tasterunten;
-//     if (Analogwert < 555)
-//         return Tasterlinks;
-//     if (Analogwert < 790)
-//         return Tasterselect;
-
-//     return KeinTaster; // Ausgabe wenn kein Taster gedrückt wurde.
-// }
-
-// int TasterStatusDebounce() 
-// {
-//     static int oldState;
-//     static int lastDebouncedState;
-//     static unsigned long startMillis;
-//     int ret;
-//     int newState = Tasterstatus();
-
-//     if (newState != oldState) { // neuer button gedrueckt?
-//         startMillis = millis();
-//     } else { // gleicher button gedrueckt
-//         if (millis() - startMillis > BUTTON_LONG_MS) { // button lange gedrueckt?
-//             lastDebouncedState = newState + 20; // 20 = offset fuer lang
-//         } else if (millis() - startMillis > DEBOUNCE_MS) { // button lange genug stabil ?
-//             lastDebouncedState = newState;
-//         }
-//     }
-//     oldState = newState;
-//     return lastDebouncedState;
-// }
-
-String railCombiEnum2Str(CCommand::eCMD railCombi) 
+String MYLCD::railCombiEnum2Str(CCommand::eCMD railCombi) 
 {
     switch(railCombi) {
         case CCommand:: i1_IN_A: return  "1inA";
@@ -203,7 +161,7 @@ void MYLCD::setup()
     lcd.backlight();
 
     tasteLinks.setDebounceTime(50); // [ms]
-    tasteOben.setDebounceTime(50); // [ms]
+    // tasteOben.setDebounceTime(50); // [ms]
     tasteSelect.setDebounceTime(50); // [ms]
 }
 
@@ -213,17 +171,21 @@ void MYLCD::loop()
     static uint8_t currentMenuItem = 0;
     static uint8_t previousMenuItem = 1;
     static unsigned long selLangMsStart = 0;
+    static unsigned long linksLangMsStart = 0;
     static uint8_t selCmd;
     static bool select;
+    static bool tasteLinksLongPress;
+    static bool tasteLinksLongPressEdge;
     static bool tasteSelectLongPress;
     static bool tasteSelectLongPressEdge;
     static uint8_t activeCmdCountOld = 0;
     static bool activeOld;
 
     tasteLinks.loop();
-    tasteOben.loop();
+    // tasteOben.loop();
     tasteSelect.loop();
 
+    // select lang gedrueckt ?
     tasteSelectLongPressEdge = false;
     if (tasteSelect.isPressed()) {
         selLangMsStart = millis(); // timer starten
@@ -233,6 +195,18 @@ void MYLCD::loop()
         selLangMsStart = 0;
     } else if (tasteSelect.isReleased()) {
         tasteSelectLongPress = false;
+    }
+
+    // links lang gedrueckt ?
+    tasteLinksLongPressEdge = false;
+    if (tasteLinks.isPressed()) {
+        linksLangMsStart = millis(); // timer starten
+    } else if  (LOW == tasteLinks.getState() && linksLangMsStart > 0 && millis() - linksLangMsStart > 1000) { // immer noch gedrueckt ?
+        tasteLinksLongPress = true;
+        tasteLinksLongPressEdge = true;
+        linksLangMsStart = 0;
+    } else if (tasteLinks.isReleased()) {
+        tasteLinksLongPress = false;
     }
     
     // blaettern wenn sel lang gedrueckt
@@ -260,7 +234,7 @@ void MYLCD::loop()
                 lcdRefresh = true;
                 
             }
-            if (tasteOben.isReleased()) {
+            if (tasteLinksLongPressEdge) {
                 select = ! select;
                 lcdRefresh = true;
             }
@@ -306,10 +280,11 @@ void MYLCD::loop()
                 selCmd = 0; // bei 0 wieder anfangen
                 lcd.clear();
             } else if (activeCmdCountOld != CCommand::getActiveCmdCount()) { // oder anzahl hat sich geandert ? 
+                activeCmdCountOld = CCommand::getActiveCmdCount();
                 lcdRefresh = true;
             }
-            if (tasteOben.isReleased()) {
-                select = ! select;
+            if (tasteLinksLongPressEdge) {
+                CCommand::resetAllCmds();
                 lcdRefresh = true;
             }
             //========================================

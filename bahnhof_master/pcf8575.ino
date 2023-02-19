@@ -40,12 +40,12 @@ void MY_PCF8575::setCin13(uint8_t val) {pcf8575_2.digitalWrite( 9,!val);}
 void MY_PCF8575::setCin14(uint8_t val) {pcf8575_2.digitalWrite( 8,!val);}
 void MY_PCF8575::set19inG(uint8_t val) {pcf8575_2.digitalWrite( 0,!val);}
 void MY_PCF8575::set12inK(uint8_t val) {pcf8575_2.digitalWrite( 1,!val);}
-void MY_PCF8575::setRes1 (uint8_t val) {pcf8575_2.digitalWrite( 2,!val);}
-void MY_PCF8575::setRes2 (uint8_t val) {pcf8575_2.digitalWrite( 3,!val);}
-void MY_PCF8575::setRes3 (uint8_t val) {pcf8575_2.digitalWrite( 4,!val);}
-void MY_PCF8575::setRes4 (uint8_t val) {pcf8575_2.digitalWrite( 5,!val);}
-void MY_PCF8575::setRes5 (uint8_t val) {pcf8575_2.digitalWrite( 6,!val);}
-void MY_PCF8575::setRes6 (uint8_t val) {pcf8575_2.digitalWrite( 7,!val);}
+void MY_PCF8575::set20inK(uint8_t val) {pcf8575_2.digitalWrite( 2,!val);}
+void MY_PCF8575::set13inK(uint8_t val) {pcf8575_2.digitalWrite( 3,!val);}
+void MY_PCF8575::set14inK(uint8_t val) {pcf8575_2.digitalWrite( 4,!val);}
+void MY_PCF8575::set4inL (uint8_t val) {pcf8575_2.digitalWrite( 5,!val);}
+void MY_PCF8575::set6inL (uint8_t val) {pcf8575_2.digitalWrite( 6,!val);}
+void MY_PCF8575::set8inL (uint8_t val) {pcf8575_2.digitalWrite( 7,!val);}
 
 // pcf8575_3 => 0x22
 void MY_PCF8575::set3inB(uint8_t val)  {pcf8575_3.digitalWrite(15,!val);}
@@ -74,14 +74,14 @@ void MY_PCF8575::setCin19(uint8_t val) {pcf8575_4.digitalWrite(11,!val);}
 void MY_PCF8575::setNin1 (uint8_t val) {pcf8575_4.digitalWrite(10,!val);}
 void MY_PCF8575::set19inM(uint8_t val) {pcf8575_4.digitalWrite( 9,!val);}
 void MY_PCF8575::setMin19(uint8_t val) {pcf8575_4.digitalWrite( 8,!val);}
-void MY_PCF8575::setRes7 (uint8_t val) {pcf8575_4.digitalWrite( 0,!val);}
-void MY_PCF8575::setRes8 (uint8_t val) {pcf8575_4.digitalWrite( 1,!val);}
-void MY_PCF8575::setRes9 (uint8_t val) {pcf8575_4.digitalWrite( 2,!val);}
-void MY_PCF8575::setRes10(uint8_t val) {pcf8575_4.digitalWrite( 3,!val);}
-void MY_PCF8575::setRes11(uint8_t val) {pcf8575_4.digitalWrite( 4,!val);}
-void MY_PCF8575::setRes12(uint8_t val) {pcf8575_4.digitalWrite( 5,!val);}
-void MY_PCF8575::setRes13(uint8_t val) {pcf8575_4.digitalWrite( 6,!val);}
-void MY_PCF8575::setRes14(uint8_t val) {pcf8575_4.digitalWrite( 7,!val);}
+void MY_PCF8575::set9inL (uint8_t val) {pcf8575_4.digitalWrite( 0,!val);}
+void MY_PCF8575::set12inL(uint8_t val) {pcf8575_4.digitalWrite( 1,!val);}
+void MY_PCF8575::set20inL(uint8_t val) {pcf8575_4.digitalWrite( 2,!val);}
+void MY_PCF8575::set13inR(uint8_t val) {pcf8575_4.digitalWrite( 3,!val);}
+void MY_PCF8575::set14inR(uint8_t val) {pcf8575_4.digitalWrite( 4,!val);}
+void MY_PCF8575::setKin12(uint8_t val) {pcf8575_4.digitalWrite( 5,!val);}
+void MY_PCF8575::setKin20(uint8_t val) {pcf8575_4.digitalWrite( 6,!val);}
+void MY_PCF8575::setKin13(uint8_t val) {pcf8575_4.digitalWrite( 7,!val);}
 
 // pcf8575_5 => 0x24
 void MY_PCF8575::set6inA(uint8_t val) {pcf8575_5.digitalWrite(15,!val);}
@@ -105,14 +105,14 @@ void MY_PCF8575::setDin9(uint8_t val) {pcf8575_5.digitalWrite( 7,!val);}
 void MY_PCF8575::setHin1(uint8_t val)  {pcf8575_6.digitalWrite(15,!val);}
 void MY_PCF8575::setHin2(uint8_t val)  {pcf8575_6.digitalWrite(14,!val);}
 void MY_PCF8575::setHin3(uint8_t val)  {pcf8575_6.digitalWrite(13,!val);}
-void MY_PCF8575::setRes15(uint8_t val) {pcf8575_6.digitalWrite(12,!val);}
+void MY_PCF8575::setHin4(uint8_t val) {pcf8575_6.digitalWrite(12,!val);}
 void MY_PCF8575::setJin5(uint8_t val)  {pcf8575_6.digitalWrite(11,!val);}
 void MY_PCF8575::setJin6(uint8_t val)  {pcf8575_6.digitalWrite(10,!val);}
 void MY_PCF8575::setJin7(uint8_t val)  {pcf8575_6.digitalWrite( 9,!val);}
-void MY_PCF8575::setJinB(uint8_t val)  {pcf8575_6.digitalWrite( 8,!val);}
-void MY_PCF8575::setRes16(uint8_t val) {pcf8575_6.digitalWrite( 0,!val);}
-void MY_PCF8575::setRes17(uint8_t val) {pcf8575_6.digitalWrite( 1,!val);}
-void MY_PCF8575::setRes18(uint8_t val) {pcf8575_6.digitalWrite( 2,!val);}
+void MY_PCF8575::setJin8(uint8_t val)  {pcf8575_6.digitalWrite( 8,!val);}
+void MY_PCF8575::setKin14(uint8_t val) {pcf8575_6.digitalWrite( 0,!val);}
+void MY_PCF8575::setRin13(uint8_t val) {pcf8575_6.digitalWrite( 1,!val);}
+void MY_PCF8575::setRin14(uint8_t val) {pcf8575_6.digitalWrite( 2,!val);}
 void MY_PCF8575::setRes19(uint8_t val) {pcf8575_6.digitalWrite( 3,!val);}
 void MY_PCF8575::setRes20(uint8_t val) {pcf8575_6.digitalWrite( 4,!val);}
 void MY_PCF8575::setRes21(uint8_t val) {pcf8575_6.digitalWrite( 5,!val);}
@@ -180,29 +180,6 @@ void MY_PCF8575::setup()
         pcf8575_7.digitalWrite(i, HIGH);
     }
 }
-
-// void setRemoteIo(bool status)
-// {
-//     if (!status) {
-//         pcf8575.digitalWrite(0, LOW);
-//         pcf8575.digitalWrite(1, LOW);
-//         pcf8575_2.digitalWrite(0, LOW);
-//         pcf8575_2.digitalWrite(1, LOW);
-//     } else {
-//         pcf8575.digitalWrite(0, HIGH);
-//         pcf8575.digitalWrite(1, HIGH);
-//         pcf8575_2.digitalWrite(0, HIGH);
-//         pcf8575_2.digitalWrite(1, HIGH);
-//     }
-//     // static int pin = 0;
-//     // pcf8575.digitalWrite(pin, HIGH);
-//     // delay(100);
-//     // pcf8575.digitalWrite(pin, LOW);
-//     // delay(100);
-//     // pin++;
-//     // if (pin > 15)
-//     //     pin = 0;
-// }
 
 void MY_PCF8575::outputTest() {
     const uint8_t msDelayOut = 100;

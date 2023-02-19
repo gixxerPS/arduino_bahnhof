@@ -51,50 +51,50 @@ ezButton buttonArray[] = { // aktiviert automatisch pullup
   ezButton(29), // cA
   ezButton(26), // cD
   ezButton(27), // cC
-  ezButton(68), // 15li
-  ezButton(69), // 16li
-  ezButton(32), // 17li
-  ezButton(33), // 18li
+  ezButton(69), // 15li
+  ezButton(68), // 16li
+  ezButton(33), // 17li
+  ezButton(32), // 18li
 
   // rawInputsSlave2 byte1
-  ezButton(34), // 19li
-  ezButton(35), // Kre
-  ezButton(36), // cR
-  ezButton(37), // Kbel
-  ezButton(38), // Bbel
-  ezButton(39), // Abel
-  ezButton(40), // Nbel
-  ezButton(41), // Lbel
+  ezButton(35), // 19li
+  ezButton(34), // Kre
+  ezButton(37), // cR
+  ezButton(36), // Kbel
+  ezButton(39), // Bbel
+  ezButton(38), // Abel
+  ezButton(41), // Nbel
+  ezButton(40), // Lbel
 
   // rawInputsSlave2 byte2
-  ezButton(42), // Gbel2
-  ezButton(43), // Fbel
-  ezButton(44), // Gbel1
-  ezButton(45), // cM
-  ezButton(46), // cL
-  ezButton(47), // cK
+  ezButton(43), // Gbel2
+  ezButton(42), // Tbel
+  ezButton(45), // Gbel1
+  ezButton(44), // cM
+  ezButton(46), // cK
+  ezButton(47), // cL
   ezButton(22), // cJ???
   ezButton(23), // cH
 
   // rawInputsSlave2 byte3
   ezButton(24), // cG
   ezButton(25), // cF
-  ezButton(54), // 1li
-  ezButton(55), // 2li
-  ezButton(56), // 3li
-  ezButton(57), // 4li
-  ezButton(58), // 5li
-  ezButton(59), // 6li
+  ezButton(55), // 1li
+  ezButton(54), // 2li
+  ezButton(57), // 3li
+  ezButton(56), // 4li
+  ezButton(59), // 5li
+  ezButton(58), // 6li
 
   // rawInputsSlave2 byte4
-  ezButton(60), // 7li
-  ezButton(61), // 8li
-  ezButton(62), // 9li
-  ezButton(63), // 10li
-  ezButton(64), // 11li
-  ezButton(65), // 12li
-  ezButton(66), // 13li
-  ezButton(67) // 14li
+  ezButton(61), // 7li
+  ezButton(60), // 8li
+  ezButton(63), // 9li
+  ezButton(62), // 10li
+  ezButton(65), // 11li
+  ezButton(64), // Fbel
+  ezButton(67), // 13li
+  ezButton(66) // 14li
 };
 uint8_t ezBtnArrLen = sizeof(buttonArray) / sizeof(ezButton);
 
@@ -130,7 +130,7 @@ void setInput(uint8_t &inputByte, uint8_t bitpos, int val) {
 void printInputs()
 {
   static unsigned long lastTXTime;
-  if (millis() - lastTXTime > 10000) {
+  if (millis() - lastTXTime > 5000) {
     lastTXTime = millis();
     Serial.println("Eingangsstati >>>>>>>>>>>>>>>>>>>>");
     for (int i = 0; i < RX_SLAVE_BYTE_CNT; i++) {
@@ -139,6 +139,8 @@ void printInputs()
       Serial.print("=0x");
       Serial.println(rawInputsSlave2[i], HEX);
     }
+    //Serial.print("pin58=");
+    //Serial.println(digitalRead(58));
   }
 }
 void printOutputs()
@@ -301,7 +303,7 @@ void loop()
   MY_PCF8575::setJin10(rawOutputsSlave2[5] & (1<<6));
   MY_PCF8575::setJin9(rawOutputsSlave2[5] & (1<<7));
   
-  // printInputs();
+  //printInputs();
   // printOutputs();
 
 

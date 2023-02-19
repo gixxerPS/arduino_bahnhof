@@ -1,6 +1,8 @@
 # arduino_bahnhof
 modellbau bahnhofssteuerung
+
 160 Digitalausgaenge (Relais)
+
 ca 100 Digitaleingaenge
 
 ## hardware
@@ -17,9 +19,10 @@ ca 100 Digitaleingaenge
 - master / slave kommunikation via uart (Serial1)
 - lcd menue / bedienung mit 2 buttons (auf/select)
 - befehlssteuerung mit gleisbelegt pruefung und ueberwachung um strecke wieder frei zu geben
+- saemtliche eingaenge entprellt
 
 ## verbindung
 - das vergisst man schnell wieder mit den relais:
--- der arduino zieht den optokoppler nach masse -> also Steuerkreis ueber VCC und INx
--- der optokoppler schließt den kreis mit dem relais ueber JD-VCC und GND -> also lastkreis ueber JD-VCC und GND
+    - der arduino zieht den optokoppler nach masse -> also Steuerkreis ueber VCC und INx
+    - der optokoppler schließt den kreis mit dem relais ueber JD-VCC und GND -> also lastkreis ueber JD-VCC und GND
 ![Relaismodulanschluss](docs/2023-02-19%2011_09_44-Window.png)

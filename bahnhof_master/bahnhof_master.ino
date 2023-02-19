@@ -436,7 +436,7 @@ void loop()
         CCommand::setCmdInputA_Z( CCommand::cN, DI::rawInputsSlave1[3] & (1<<5) ); 
         CCommand::setCmdInputA_Z( CCommand::cR, rawInputsSlave2[1] & (1<<2) );
         CCommand::setCmdInputA_Z( CCommand::cS, 0/*rawInputsSlave2[4] & (1<<0) */); // fehlt ???
-        CCommand::setCmdInputA_Z( CCommand::cT, 0/*rawInputsSlave2[4] & (1<<1) */); // fehlt ???
+        CCommand::setCmdInputA_Z( CCommand::cT, 0/*rawInputsSlave2[4] & (1<<1) */); // fehlt => parallel mit cF
         
         //4.2 Gleisstati mappen von rawInputs -> railStatus
         CCommand::setRailInput1li  (rawInputsSlave2[3] & (1<<2));
@@ -461,7 +461,7 @@ void loop()
         CCommand::setRailInput7re  (DI::rawInputsSlave1[6] & (1<<4));
         CCommand::setRailInput7bel (DI::rawInputsSlave1[1] & (1<<4));
         CCommand::setRailInput8li  (rawInputsSlave2[4] & (1<<1));
-        CCommand::setRailInput8re  (DI::rawInputsSlave1[6] & (1<<6));
+        CCommand::setRailInput8re  (DI::rawInputsSlave1[6] & (1<<5));
         CCommand::setRailInput8bel (DI::rawInputsSlave1[1] & (1<<5));
         CCommand::setRailInput9li  (rawInputsSlave2[4] & (1<<2));
         CCommand::setRailInput9re  (DI::rawInputsSlave1[6] & (1<<6));
@@ -494,7 +494,7 @@ void loop()
         CCommand::setRailInput18re (DI::rawInputsSlave1[3] & (1<<3));
         CCommand::setRailInput18bel(DI::rawInputsSlave1[0] & (1<<3));
         CCommand::setRailInput19li (rawInputsSlave2[1] & (1<<0));
-        CCommand::setRailInput19re (DI::rawInputsSlave1[3] & (1<<3));
+        CCommand::setRailInput19re (DI::rawInputsSlave1[3] & (1<<4));
         CCommand::setRailInput19bel(DI::rawInputsSlave1[0] & (1<<0));
         // spezial
         // CCommand::setRailInput20li (rawInputsSlave1[0] & (1<<0));
@@ -506,9 +506,12 @@ void loop()
         CCommand::setRailInputBbel(rawInputsSlave2[1] & (1<<4));
         CCommand::setRailInputKbel(rawInputsSlave2[1] & (1<<3));
         CCommand::setRailInputLbel(rawInputsSlave2[1] & (1<<7));
+        CCommand::setRailInputLre (DI::rawInputsSlave1[0] & (1<<1));
         CCommand::setRailInputGbel(rawInputsSlave2[2] & (1<<2));
+        CCommand::setRailInputGbel2(rawInputsSlave2[2] & (1<<0));
         CCommand::setRailInputFbel(rawInputsSlave2[4] & (1<<5));
         CCommand::setRailInputNbel(rawInputsSlave2[1] & (1<<6));
+        CCommand::setRailInputRre (DI::rawInputsSlave1[1] & (1<<1));
         CCommand::setRailInputTbel(rawInputsSlave2[2] & (1<<1));
         loopStateNext = 50;
         break;
@@ -598,11 +601,12 @@ void loop()
         Serial.print(i);
         Serial.print("]:");
         Serial.print(CCommand::activeCommands[i].src);
-        Serial.print(" -> ");
+        Serial.print("->");
         Serial.print(CCommand::activeCommands[i].target);
-        Serial.print("(");
+        Serial.print(" (");
         Serial.print(MYLCD::railCombiEnum2Str(CCommand::activeCommands[i].railCombi)); 
         Serial.print(") | ");
+        
       }
     }
     Serial.println();
@@ -620,5 +624,5 @@ void loop()
     Serial.println(CCommand::curTarget);
 
   }
-  printInputs();
+  //printInputs();
 }

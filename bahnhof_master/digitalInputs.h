@@ -11,7 +11,7 @@ uint8_t rawInputsSlave1[10]; // 1=aktiv/gedrueckt, 0=inaktiv/nicht gedrueckt
 ezButton buttonArray[] = {
   // rawInputsSlave1 byte0
   ezButton(52), // 19bel
-  ezButton(53), // Lfrei
+  ezButton(53), // Lre
   ezButton(50), // 17bel
   ezButton(51), // 18bel
   ezButton(16), // 15bel
@@ -21,7 +21,7 @@ ezButton buttonArray[] = {
 
   // rawInputsSlave1 byte1
   ezButton(12), // 11bel
-  ezButton(13), // 12bel => gibts nicht
+  ezButton(13), // Rre
   ezButton(10), // 9bel
   ezButton(11), // 10bel
   ezButton( 8), // 7bel

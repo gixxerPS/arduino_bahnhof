@@ -83,40 +83,40 @@ eCMD CCommand::mapSrcTarget2Cmd(eRail src, eRail target) {
         else if (target == cG) {ret = i13_IN_G;}
         else if (target == cK) {ret = i13_IN_K;}
         else if (target == cR) {ret = i13_IN_R;}
-        else if (target == cF) {ret = i13_IN_T;}
+        else if (target == cF) {ret = i13_IN_T;} // 13inF = 13inT
     } else if (src == c14) { // 14in...
         if (target == cA) {ret = i14_IN_A;}
         else if (target == cB) {ret = i14_IN_B;}
         else if (target == cG) {ret = i14_IN_G;}
         else if (target == cK) {ret = i14_IN_K;}
         else if (target == cR) {ret = i14_IN_R;}
-        else if (target == cF) {ret = i14_IN_T;}
+        else if (target == cF) {ret = i14_IN_T;} // 14inF = 14inT
     } else if (src == c15) { // 15in...
         if (target == cA) {ret = i15_IN_A;}
         else if (target == cB) {ret = i15_IN_B;}
         else if (target == cG) {ret = i15_IN_G;}
-        else if (target == cF) {ret = i15_IN_T;}
+        else if (target == cF) {ret = i15_IN_T;} // 15inF = 15inT
     } else if (src == c16) { // 16in...
         if (target == cA) {ret = i16_IN_A;}
         else if (target == cB) {ret = i16_IN_B;}
         else if (target == cG) {ret = i16_IN_G;}
-        else if (target == cF) {ret = i16_IN_T;}
+        else if (target == cF) {ret = i16_IN_T;} // 16inF = 16inT
     } else if (src == c17) { // 17in...
         if (target == cA) {ret = i17_IN_A;}
         else if (target == cB) {ret = i17_IN_B;}
         else if (target == cG) {ret = i17_IN_G;}
-        else if (target == cF) {ret = i17_IN_T;}
+        else if (target == cF) {ret = i17_IN_T;} // 17inF = 17inT
     } else if (src == c18) { // 18in...
         if (target == cA) {ret = i18_IN_A;}
         else if (target == cB) {ret = i18_IN_B;}
         else if (target == cG) {ret = i18_IN_G;}
-        else if (target == cF) {ret = i18_IN_T;}
+        else if (target == cF) {ret = i18_IN_T;} // 18inF = 18inT
     } else if (src == c19) { // 19in...
         if (target == cA) {ret = i19_IN_A;}
         else if (target == cB) {ret = i19_IN_B;}
         else if (target == cG) {ret = i19_IN_G;}
         else if (target == cM) {ret = i19_IN_M;}
-        else if (target == cF) {ret = i19_IN_T;}
+        else if (target == cF) {ret = i19_IN_T;} // 19inF = 19inT
     } else if (src == c20) { // 20in...
         if (target == cK) {ret = i20_IN_K;}
         else if (target == cL) {ret = i20_IN_L;}
@@ -607,10 +607,22 @@ int8_t CCommand::checkAndActivateNewCommand()
         return -3;
     } else if (curTarget == cB && getRailInputBbel()) {
         return -3;
-    } else if (curTarget == cF && getRailInputFbel()) {
-        return -3;
-    } else if (curTarget == cG && getRailInputGbel()) {
-        return -3;
+    } else if (curTarget == cF) {
+        if (getRailInputFbel()) {
+            return -3;
+        } else if (getRailInputTbel()) {
+            return -3;
+        }
+    } else if (curTarget == cG) {
+        if (curSrc == c1 || curSrc == c2 || curSrc == c3 || curSrc == c4) {
+            if (getRailInputGbel2()) {
+                return -3;
+            }
+        } else if (curSrc == c13 || curSrc == c14 || curSrc == c15 || curSrc == c16 || curSrc == c17 || curSrc == c18 || curSrc == c19 ) {
+            if (getRailInputGbel()) {
+                return -3;
+            }
+        }
     } else if (curTarget == cK && getRailInputKbel()) {
         return -3;
     } else if (curTarget == cL && getRailInputLbel()) {
@@ -922,43 +934,43 @@ void CCommand::checkAndFinishRunningCommand()
             } else if (activeCommands[i].target == c12) {
                     if (getRailInput12li()) {finishCmd(activeCommands[i]);}
             } else if (activeCommands[i].target == c13) {
-                if (activeCommands[i].src == cT) {
+                if (activeCommands[i].src == cJ) {
                     if (getRailInput13re()) {finishCmd(activeCommands[i]);}
                 } else {
                     if (getRailInput13li()) {finishCmd(activeCommands[i]);}
                 }
             } else if (activeCommands[i].target == c14) {
-                if (activeCommands[i].src == cT) {
+                if (activeCommands[i].src == cJ) {
                     if (getRailInput14re()) {finishCmd(activeCommands[i]);}
                 } else {
                     if (getRailInput14li()) {finishCmd(activeCommands[i]);}
                 }
             } else if (activeCommands[i].target == c15) {
-                if (activeCommands[i].src == cT) {
+                if (activeCommands[i].src == cJ) {
                     if (getRailInput15re()) {finishCmd(activeCommands[i]);}
                 } else {
                     if (getRailInput15li()) {finishCmd(activeCommands[i]);}
                 }
             } else if (activeCommands[i].target == c16) {
-                if (activeCommands[i].src == cT) {
+                if (activeCommands[i].src == cJ) {
                     if (getRailInput16re()) {finishCmd(activeCommands[i]);}
                 } else {
                     if (getRailInput16li()) {finishCmd(activeCommands[i]);}
                 }
             } else if (activeCommands[i].target == c17) {
-                if (activeCommands[i].src == cT) {
+                if (activeCommands[i].src == cJ) {
                     if (getRailInput17re()) {finishCmd(activeCommands[i]);}
                 } else {
                     if (getRailInput17li()) {finishCmd(activeCommands[i]);}
                 }
             } else if (activeCommands[i].target == c18) {
-                if (activeCommands[i].src == cT) {
+                if (activeCommands[i].src == cJ) {
                     if (getRailInput18re()) {finishCmd(activeCommands[i]);}
                 } else {
                     if (getRailInput18li()) {finishCmd(activeCommands[i]);}
                 }
             } else if (activeCommands[i].target == c19) {
-                if (activeCommands[i].src == cT) {
+                if (activeCommands[i].src == cJ) {
                     if (getRailInput19re()) {finishCmd(activeCommands[i]);}
                 } else {
                     if (getRailInput19li()) {finishCmd(activeCommands[i]);}
@@ -980,23 +992,48 @@ void CCommand::checkAndFinishRunningCommand()
             } else if (activeCommands[i].target == cK) {
                     if (getRailInputKre()) {finishCmd(activeCommands[i]);}
             } else if (activeCommands[i].target == cL) {
-                    if (getRailInputLbel()) {finishCmd(activeCommands[i]);} // evtl negative flanke noetig ?!?!?!
+                    if (getRailInputLre()) {finishCmd(activeCommands[i]);}
             } else if (activeCommands[i].target == cG) {
-                // negative flanke von ausfahrtsgleis setzt auftrag zurueck
-                if (activeCommands[i].railReleaseState && !getRailInputGbel()) {
-                    finishCmd(activeCommands[i]);
-                } else {
-                    activeCommands[i].railReleaseState = getRailInputGbel();
+                if (activeCommands[i].src == c1 || activeCommands[i].src == c2 || activeCommands[i].src == c3 || activeCommands[i].src == c4) {
+                    // negative flanke von ausfahrtsgleis setzt auftrag zurueck
+                    if (activeCommands[i].railReleaseState && !getRailInputGbel2()) {
+                        finishCmd(activeCommands[i]);
+                    } else {
+                        activeCommands[i].railReleaseState = getRailInputGbel2();
+                    }
+                } else if (activeCommands[i].src == c13 || activeCommands[i].src == c14 || activeCommands[i].src == c15 || activeCommands[i].src == c16 || activeCommands[i].src == c17 || activeCommands[i].src == c18 || activeCommands[i].src == c19 ) {
+                    // negative flanke von ausfahrtsgleis setzt auftrag zurueck
+                    if (activeCommands[i].railReleaseState && !getRailInputGbel()) {
+                        finishCmd(activeCommands[i]);
+                    } else {
+                        activeCommands[i].railReleaseState = getRailInputGbel();
+                    }
                 }
             } else if (activeCommands[i].target == cF) {
-                // negative flanke von ausfahrtsgleis setzt auftrag zurueck
-                if (activeCommands[i].railReleaseState && !getRailInputFbel()) {
+                if (activeCommands[i].src == c13 || activeCommands[i].src == c14 || activeCommands[i].src == c15 || activeCommands[i].src == c16 || activeCommands[i].src == c17 || activeCommands[i].src == c18 || activeCommands[i].src == c19 ) {
+                    // negative flanke von ausfahrtsgleis setzt auftrag zurueck
+                    if (activeCommands[i].railReleaseState && !getRailInputTbel()) {
+                        finishCmd(activeCommands[i]);
+                    } else {
+                        activeCommands[i].railReleaseState = getRailInputTbel();
+                    }
+                } else {
+                    // negative flanke von ausfahrtsgleis setzt auftrag zurueck
+                    if (activeCommands[i].railReleaseState && !getRailInputFbel()) {
+                        finishCmd(activeCommands[i]);
+                    } else {
+                        activeCommands[i].railReleaseState = getRailInputFbel();
+                    }  
+                }   
+            } else if (activeCommands[i].target == cN) {
+                    // negative flanke von ausfahrtsgleis setzt auftrag zurueck
+                if (activeCommands[i].railReleaseState && !getRailInputNbel()) {
                     finishCmd(activeCommands[i]);
                 } else {
-                    activeCommands[i].railReleaseState = getRailInputFbel();
-                }    
-            } else if (activeCommands[i].target == cN) {
-                    if (getRailInputNbel()) {finishCmd(activeCommands[i]);} // evtl negative flanke noetig ?!?!?!
+                    activeCommands[i].railReleaseState = getRailInputNbel();
+                }
+            } else if (activeCommands[i].target == cR) {
+                    if (getRailInputRre()) {finishCmd(activeCommands[i]);}
             } else if (activeCommands[i].target == cT) {
                 // negative flanke von ausfahrtsgleis setzt auftrag zurueck
                 if (activeCommands[i].railReleaseState && !getRailInputTbel()) {

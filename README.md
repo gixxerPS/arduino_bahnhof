@@ -16,4 +16,4 @@ ca 100 Digitaleingaenge
 
 ## verbindung
 - das vergisst man schnell wieder mit den relais:
-!(doc/2023-02-19%2011_09_44-Window.png)
+![Relaismodulanschluss](doc/2023-02-19%2011_09_44-Window.png)

@@ -13,3 +13,7 @@ ca 100 Digitaleingaenge
 - master / slave kommunikation via uart (Serial1)
 - lcd menue / bedienung mit 2 buttons (auf/select)
 - befehlssteuerung mit gleisbelegt pruefung und ueberwachung um strecke wieder frei zu geben
+
+## verbindung
+- das vergisst man schnell wieder mit den relais:
+!(doc/2023-02-19%2011_09_44-Window.png)

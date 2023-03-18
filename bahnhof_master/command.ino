@@ -184,6 +184,13 @@ eCMD CCommand::mapSrcTarget2Cmd(eRail src, eRail target) {
         else if (target == c13) {ret = iK_IN_13;}
         else if (target == c14) {ret = iK_IN_14;}
         else if (target == c20) {ret = iK_IN_20;}
+    } else if (src == cL) { // Lin...
+        if (target == c4) {ret = iL_IN_4;}
+        else if (target == c6) {ret = iL_IN_6;}
+        else if (target == c8) {ret = iL_IN_8;}
+        else if (target == c9) {ret = iL_IN_9;}
+        else if (target == c12) {ret = iL_IN_12;}
+        else if (target == c20) {ret = iL_IN_20;}
     } else if (src == cM) { // Min...
         if (target == c19) {ret = iM_IN_19;}
     } else if (src == cN) { // Nin...
@@ -191,6 +198,16 @@ eCMD CCommand::mapSrcTarget2Cmd(eRail src, eRail target) {
     } else if (src == cR) { // Rin...
         if (target == c13) {ret = iR_IN_13;}
         else if (target == c14) {ret = iR_IN_14;}
+    // } else if (src == cL) { // Reihenfolge egal bei *inL
+    //     if (target == c4) {ret = i4_IN_L;}
+    //     else if (target == c6) {ret = i6_IN_L;}
+    //     else if (target == c8) {ret = i8_IN_L;}
+    //     else if (target == c9) {ret = i9_IN_L;}
+    //     else if (target == c12) {ret = i12_IN_L;}
+    //     else if (target == c20) {ret = i20_IN_L;}
+    } else if (src == cR) { // Reihenfolge egal bei *inR
+        if (target == c13) {ret = i13_IN_R;}
+        else if (target == c14) {ret = i14_IN_R;}
     }
     return ret;
 }
@@ -264,6 +281,8 @@ int8_t CCommand::checkAndActivateNewCommand()
                     return -4;
                 } else if (curSrc == cH && cmdBlocksHin4(activeCommands[i])) {
                     return -4;
+                } else if (curSrc == cL && cmdBlocksLin4(activeCommands[i])) {
+                    return -4;
                 }
             } else if (curTarget == c5) {
                 if (curSrc == cC && cmdBlocksCin5(activeCommands[i])) {
@@ -279,6 +298,8 @@ int8_t CCommand::checkAndActivateNewCommand()
                 } else if (curSrc == cD && cmdBlocksDin6(activeCommands[i])) {
                     return -4;
                 } else if (curSrc == cJ && cmdBlocksJin6(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cL && cmdBlocksLin6(activeCommands[i])) {
                     return -4;
                 }
             } else if (curTarget == c7) {
@@ -296,6 +317,8 @@ int8_t CCommand::checkAndActivateNewCommand()
                     return -4;
                 } else if (curSrc == cJ && cmdBlocksJin8(activeCommands[i])) {
                     return -4;
+                } else if (curSrc == cL && cmdBlocksLin8(activeCommands[i])) {
+                    return -4;
                 }
             } else if (curTarget == c9) {
                 if (curSrc == cC && cmdBlocksCin9(activeCommands[i])) {
@@ -303,6 +326,8 @@ int8_t CCommand::checkAndActivateNewCommand()
                 } else if (curSrc == cD && cmdBlocksDin9(activeCommands[i])) {
                     return -4;
                 } else if (curSrc == cJ && cmdBlocksJin9(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cL && cmdBlocksLin9(activeCommands[i])) {
                     return -4;
                 }
             } else if (curTarget == c10) {
@@ -323,6 +348,8 @@ int8_t CCommand::checkAndActivateNewCommand()
                 }
             } else if (curTarget == c12) {
                 if (curSrc == cK && cmdBlocksKin12(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cL && cmdBlocksLin12(activeCommands[i])) {
                     return -4;
                 }
             } else if (curTarget == c13) {
@@ -391,6 +418,8 @@ int8_t CCommand::checkAndActivateNewCommand()
                 }
             } else if (curTarget == c20) {
                 if (curSrc == cK && cmdBlocksKin20(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == cL && cmdBlocksLin20(activeCommands[i])) {
                     return -4;
                 }
             } else if (curTarget == cA) {
@@ -484,6 +513,21 @@ int8_t CCommand::checkAndActivateNewCommand()
                     return -4;
                 } else if (curSrc == c11 && cmdBlocks11inF(activeCommands[i])) {
                     return -4;
+                // 13inF -> 13inT
+                } else if (curSrc == c13 && cmdBlocks13inT(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c14 && cmdBlocks14inT(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c15 && cmdBlocks15inT(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c16 && cmdBlocks16inT(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c17 && cmdBlocks17inT(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c18 && cmdBlocks18inT(activeCommands[i])) {
+                    return -4;
+                } else if (curSrc == c19 && cmdBlocks19inT(activeCommands[i])) {
+                    return -4;
                 }
             } else if (curTarget == cG) {
                 if (curSrc == c1 && cmdBlocks1inG(activeCommands[i])) {
@@ -571,27 +615,27 @@ int8_t CCommand::checkAndActivateNewCommand()
         return -3;
     } else if (curTarget == c3 && getRailInput3bel()) {
         return -3;
-    } else if (curTarget == c4 && getRailInput4bel()) {
+    } else if (curTarget == c4 && getRailInput4bel() && curSrc != cL) {
         return -3;
     } else if (curTarget == c5 && getRailInput5bel()) {
         return -3;
-    } else if (curTarget == c6 && getRailInput6bel()) {
+    } else if (curTarget == c6 && getRailInput6bel() && curSrc != cL) {
         return -3;
     } else if (curTarget == c7 && getRailInput7bel()) {
         return -3;
-    } else if (curTarget == c8 && getRailInput8bel()) {
+    } else if (curTarget == c8 && getRailInput8bel() && curSrc != cL) {
         return -3;
-    } else if (curTarget == c9 && getRailInput9bel()) {
+    } else if (curTarget == c9 && getRailInput9bel() && curSrc != cL) {
         return -3;
     } else if (curTarget == c10 && getRailInput10bel()) {
         return -3;
     } else if (curTarget == c11 && getRailInput11bel()) {
         return -3;
-    } else if (curTarget == c12 && getRailInput12bel()) {
+    } else if (curTarget == c12 && getRailInput12bel() && curSrc != cL) {
         return -3;
-    } else if (curTarget == c13 && getRailInput13bel()) {
+    } else if (curTarget == c13 && getRailInput13bel() && curSrc != cK && curSrc != cR) {
         return -3;
-    } else if (curTarget == c14 && getRailInput14bel()) {
+    } else if (curTarget == c14 && getRailInput14bel() && curSrc != cK && curSrc != cR) {
         return -3;
     } else if (curTarget == c15 && getRailInput15bel()) {
         return -3;
@@ -601,7 +645,7 @@ int8_t CCommand::checkAndActivateNewCommand()
         return -3;
     } else if (curTarget == c18 && getRailInput18bel()) {
         return -3;
-    } else if (curTarget == c19 && getRailInput19bel()) {
+    } else if (curTarget == c19 && getRailInput19bel() && curSrc != cM) {
         return -3;
     } else if (curTarget == cA && getRailInputAbel()) {
         return -3;
@@ -614,7 +658,9 @@ int8_t CCommand::checkAndActivateNewCommand()
             return -3;
         }
     } else if (curTarget == cG) {
-        if (curSrc == c1 || curSrc == c2 || curSrc == c3 || curSrc == c4) {
+        if (getRailInputSbel()) {
+            return -3;
+        } else if (curSrc == c1 || curSrc == c2 || curSrc == c3 || curSrc == c4) {
             if (getRailInputGbel2()) {
                 return -3;
             }
@@ -632,6 +678,8 @@ int8_t CCommand::checkAndActivateNewCommand()
     // } else if (curTarget == cR && getRailInputRbel()) { AKTUELL keine belegt meldung
     //     return -3;
     } else if (curTarget == cT && getRailInputTbel()) {
+        return -3;
+    } else if (curSrc == cH && getRailInputSbel()) {
         return -3;
     }
 
@@ -975,6 +1023,8 @@ void CCommand::checkAndFinishRunningCommand()
                 } else {
                     if (getRailInput19li()) {finishCmd(activeCommands[i]);}
                 }
+            } else if (activeCommands[i].target == c20) {
+                    if (getRailInput20li()) {finishCmd(activeCommands[i]);}
             } else if (activeCommands[i].target == cA) {
                 // negative flanke von ausfahrtsgleis setzt auftrag zurueck
                 if (activeCommands[i].railReleaseState && !getRailInputAbel()) {
@@ -1025,6 +1075,8 @@ void CCommand::checkAndFinishRunningCommand()
                         activeCommands[i].railReleaseState = getRailInputFbel();
                     }  
                 }   
+            } else if (activeCommands[i].target == cM) {
+                    if (getRailInputMre()) {finishCmd(activeCommands[i]);}
             } else if (activeCommands[i].target == cN) {
                     // negative flanke von ausfahrtsgleis setzt auftrag zurueck
                 if (activeCommands[i].railReleaseState && !getRailInputNbel()) {

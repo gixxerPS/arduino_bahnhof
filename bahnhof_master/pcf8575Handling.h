@@ -108,11 +108,11 @@ void setJin8(uint8_t val)  ;
 void setKin14(uint8_t val) ;
 void setRin13(uint8_t val) ;
 void setRin14(uint8_t val) ;
-void setRes19(uint8_t val) ;
-void setRes20(uint8_t val) ;
-void setRes21(uint8_t val) ;
-void setRes22(uint8_t val) ;
-void setRes23(uint8_t val) ;
+void setLin4(uint8_t val) ;
+void setLin6(uint8_t val) ;
+void setLin8(uint8_t val) ;
+void setLin9(uint8_t val) ;
+void setLin12(uint8_t val) ;
 
 // pcf8575_7 => 0x26
 void set8inF(uint8_t val)  ;

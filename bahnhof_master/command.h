@@ -218,8 +218,13 @@ namespace CCommand
     iM_IN_19 = 140,
     iP_IN_12 = 141,
     i1_IN_N = 142,
-    iN_IN_1 = 143
-
+    iN_IN_1 = 143,
+    iL_IN_4 = 144,
+    iL_IN_6 = 145,
+    iL_IN_8 = 146,
+    iL_IN_9 = 147,
+    iL_IN_12 = 148,
+    iL_IN_20 = 149
   };
 
   struct commandStruct

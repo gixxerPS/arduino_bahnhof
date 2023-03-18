@@ -145,7 +145,7 @@ void MY_PCF8575::setJin14(uint8_t val) {pcf8575_8.digitalWrite(11,!val);}
 void MY_PCF8575::setJin15(uint8_t val) {pcf8575_8.digitalWrite(10,!val);}
 void MY_PCF8575::setJin16(uint8_t val) {pcf8575_8.digitalWrite( 9,!val);}
 void MY_PCF8575::setJin17(uint8_t val) {pcf8575_8.digitalWrite( 8,!val);}
-void MY_PCF8575::setRes24(uint8_t val) {pcf8575_8.digitalWrite( 0,!val);}
+void MY_PCF8575::setLin20(uint8_t val) {pcf8575_8.digitalWrite( 0,!val);}
 void MY_PCF8575::setRes25(uint8_t val) {pcf8575_8.digitalWrite( 1,!val);}
 void MY_PCF8575::setRes26(uint8_t val) {pcf8575_8.digitalWrite( 2,!val);}
 void MY_PCF8575::setRes27(uint8_t val) {pcf8575_8.digitalWrite( 3,!val);}

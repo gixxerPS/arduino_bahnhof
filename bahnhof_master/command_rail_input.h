@@ -57,6 +57,8 @@ bool iFbel;
 bool iNbel;
 bool iRre;
 bool iTbel;
+bool iSbel;
+bool iMre;
 
 inline void setRailInputAbel(bool val){iAbel=val;};	inline bool getRailInputAbel(){return iAbel;};
 inline void setRailInputBbel(bool val){iBbel=val;};	inline bool getRailInputBbel(){return iBbel;};
@@ -68,5 +70,7 @@ inline void setRailInputFbel(bool val){iFbel=val;};	inline bool getRailInputFbel
 inline void setRailInputNbel(bool val){iNbel=val;};	inline bool getRailInputNbel(){return iNbel;};
 inline void setRailInputTbel(bool val){iTbel=val;};	inline bool getRailInputTbel(){return iTbel;};
 inline void setRailInputRre(bool val){iRre=val;};	inline bool getRailInputRre(){return iRre;};
+inline void setRailInputMre(bool val){iMre=val;};	inline bool getRailInputMre(){return iMre;};
+inline void setRailInputSbel(bool val){iSbel=val;};	inline bool getRailInputSbel(){return iSbel;};
 
 #endif

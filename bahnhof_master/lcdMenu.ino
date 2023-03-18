@@ -148,6 +148,13 @@ String MYLCD::railCombiEnum2Str(CCommand::eCMD railCombi)
         case CCommand::iM_IN_19: return "Min19";
         case CCommand::i1_IN_N: return "1inN";
         case CCommand::iN_IN_1: return "Nin1";
+        case CCommand::iL_IN_4 : return  "Lin4";
+        case CCommand::iL_IN_6 : return  "Lin6";
+        case CCommand::iL_IN_8 : return  "Lin8";
+        case CCommand::iL_IN_9 : return  "Lin9";
+        case CCommand::iL_IN_12: return  "Lin12";
+        case CCommand::iL_IN_20: return  "Lin20";
+        default: return "";
     }
 }
 

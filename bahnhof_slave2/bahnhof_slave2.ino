@@ -45,6 +45,8 @@
 uint8_t rawInputsSlave2[RX_SLAVE_BYTE_CNT] = {0}; // 1=aktiv/gedrueckt, 0=inaktiv/nicht gedrueckt
 uint8_t rawOutputsSlave2[TX_SLAVE_BYTE_CNT]; // werden von slave 1 empfangen
 
+#define POWER_RELAIS_PIN 31 // wird verzoegert eingeschaltet zur lastversorgung
+
 ezButton buttonArray[] = { // aktiviert automatisch pullup
   // rawInputsSlave2 byte 0
   ezButton(28), // cB
@@ -94,7 +96,18 @@ ezButton buttonArray[] = { // aktiviert automatisch pullup
   ezButton(65), // 11li
   ezButton(64), // Fbel
   ezButton(67), // 13li
-  ezButton(66) // 14li
+  ezButton(66), // 14li
+
+  // rawInputsSlave2 byte5
+  ezButton(15), // Sbel
+  ezButton(14), // 20li
+  ezButton(17), // 12li
+  ezButton(16), // Mre
+  ezButton(12), // resetAllCmd
+  ezButton(11), // 
+  ezButton(11), // 
+  ezButton(11)  // 
+
 };
 uint8_t ezBtnArrLen = sizeof(buttonArray) / sizeof(ezButton);
 
@@ -106,12 +119,14 @@ void setup()
   Serial.print(". ");
   Serial.println(__TIME__);
   RXTX::setup();
-  pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(POWER_RELAIS_PIN, OUTPUT);
+  
   MY_PCF8575::setup();
   for (byte i = 0; i < ezBtnArrLen; i++) {
     buttonArray[i].setDebounceTime(50); // [ms]
   }
-  delay(500);
+  delay(1500);
+  digitalWrite(POWER_RELAIS_PIN, HIGH);
 }
 
 /**
@@ -208,7 +223,11 @@ void loop()
   setInput(rawInputsSlave2[4],(1<<5),buttonArray[37].getState());
   setInput(rawInputsSlave2[4],(1<<6),buttonArray[38].getState());
   setInput(rawInputsSlave2[4],(1<<7),buttonArray[39].getState());
-  
+  setInput(rawInputsSlave2[5],(1<<0),buttonArray[40].getState());
+  setInput(rawInputsSlave2[5],(1<<1),buttonArray[41].getState());
+  setInput(rawInputsSlave2[5],(1<<2),buttonArray[42].getState());
+  setInput(rawInputsSlave2[5],(1<<3),buttonArray[43].getState());
+  setInput(rawInputsSlave2[5],(1<<4),buttonArray[44].getState());
   // ==========================================================================
   // ausgaenge von slave1 empfangen
   // ==========================================================================
@@ -231,11 +250,6 @@ void loop()
   static uint32_t totalMsgCntOld = 0;
   if (totalMsgCnt != totalMsgCntOld) {
     totalMsgCntOld = totalMsgCnt;
-    if (totalMsgCnt % 2) { // led bei jeder 2. nachricht togglen => ja er lebt noch
-      digitalWrite(LED_BUILTIN, HIGH);
-    } else {
-      digitalWrite(LED_BUILTIN, LOW);
-    }
     // Serial.print("Anzahl Nachrichten empfangen gesamt = ");
     // Serial.println(totalMsgCnt);
   }
@@ -284,7 +298,7 @@ void loop()
   MY_PCF8575::setJin18(rawOutputsSlave2[3] & (1<<7));
   
     // ausgangsbyte 4 => kanal 0-7 pcf an 0x21
-  MY_PCF8575::setRes24(rawOutputsSlave2[4] & (1<<0));
+  MY_PCF8575::setLin20(rawOutputsSlave2[4] & (1<<0));
   MY_PCF8575::setRes25(rawOutputsSlave2[4] & (1<<1));
   MY_PCF8575::setRes26(rawOutputsSlave2[4] & (1<<2));
   MY_PCF8575::setRes27(rawOutputsSlave2[4] & (1<<3));
@@ -301,9 +315,9 @@ void loop()
   MY_PCF8575::setJin13(rawOutputsSlave2[5] & (1<<4));
   MY_PCF8575::setJin11(rawOutputsSlave2[5] & (1<<5));
   MY_PCF8575::setJin10(rawOutputsSlave2[5] & (1<<6));
-  MY_PCF8575::setJin9(rawOutputsSlave2[5] & (1<<7));
+  MY_PCF8575::setJin9 (rawOutputsSlave2[5] & (1<<7));
   
-  //printInputs();
+  printInputs();
   // printOutputs();
 
 

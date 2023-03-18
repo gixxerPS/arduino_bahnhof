@@ -78,7 +78,7 @@ void set17inG(uint8_t val) {bitWrite(rawOutputsSlave2[3], 1, val);};
 void set18inG(uint8_t val) {bitWrite(rawOutputsSlave2[3], 0, val);};
 void setJin18(uint8_t val) {bitWrite(rawOutputsSlave2[3], 7, val);};
 void setJin19(uint8_t val) {bitWrite(rawOutputsSlave2[3], 6, val);};
-void setJin9(uint8_t val)  {bitWrite(rawOutputsSlave2[5], 7, val);};
+void setJin9 (uint8_t val) {bitWrite(rawOutputsSlave2[5], 7, val);};
 void setJin10(uint8_t val) {bitWrite(rawOutputsSlave2[5], 6, val);};
 void setJin11(uint8_t val) {bitWrite(rawOutputsSlave2[5], 5, val);};
 void setJin13(uint8_t val) {bitWrite(rawOutputsSlave2[5], 4, val);};
@@ -86,6 +86,7 @@ void setJin14(uint8_t val) {bitWrite(rawOutputsSlave2[5], 3, val);};
 void setJin15(uint8_t val) {bitWrite(rawOutputsSlave2[5], 2, val);};
 void setJin16(uint8_t val) {bitWrite(rawOutputsSlave2[5], 1, val);};
 void setJin17(uint8_t val) {bitWrite(rawOutputsSlave2[5], 0, val);};
+void setLin20(uint8_t val) {bitWrite(rawOutputsSlave2[4], 0, val);};
 
 void connectSetOutFunctions() 
 {
@@ -234,6 +235,12 @@ CCommand::setOut[CCommand::iM_IN_19] = &MY_PCF8575::setMin19;
 CCommand::setOut[CCommand::iP_IN_12] = &setEmpty;
 CCommand::setOut[CCommand::i1_IN_N] = &MY_PCF8575::set1inN;
 CCommand::setOut[CCommand::iN_IN_1] = &MY_PCF8575::setNin1;
+CCommand::setOut[CCommand::iL_IN_4] = &MY_PCF8575::setLin4;
+CCommand::setOut[CCommand::iL_IN_6] = &MY_PCF8575::setLin6;
+CCommand::setOut[CCommand::iL_IN_8] = &MY_PCF8575::setLin8;
+CCommand::setOut[CCommand::iL_IN_9] = &MY_PCF8575::setLin9;
+CCommand::setOut[CCommand::iL_IN_12] = &MY_PCF8575::setLin12;
+CCommand::setOut[CCommand::iL_IN_20] = &setLin20;
 
 }
 void printInputs()
@@ -472,7 +479,7 @@ void loop()
         CCommand::setRailInput11li (rawInputsSlave2[4] & (1<<4));
         CCommand::setRailInput11re (DI::rawInputsSlave1[7] & (1<<0));
         CCommand::setRailInput11bel(DI::rawInputsSlave1[1] & (1<<0));
-        CCommand::setRailInput12li (rawInputsSlave2[4] & (1<<5));
+        CCommand::setRailInput12li (rawInputsSlave2[5] & (1<<2));
         CCommand::setRailInput12re (DI::rawInputsSlave1[7] & (1<<1));
         CCommand::setRailInput12bel(0/*DI::rawInputsSlave1[1] & (1<<1)*/);
         CCommand::setRailInput13li (rawInputsSlave2[4] & (1<<6));
@@ -496,8 +503,7 @@ void loop()
         CCommand::setRailInput19li (rawInputsSlave2[1] & (1<<0));
         CCommand::setRailInput19re (DI::rawInputsSlave1[3] & (1<<4));
         CCommand::setRailInput19bel(DI::rawInputsSlave1[0] & (1<<0));
-        // spezial
-        // CCommand::setRailInput20li (rawInputsSlave1[0] & (1<<0));
+        CCommand::setRailInput20li (rawInputsSlave2[5] & (1<<1));
         // CCommand::setRailInput20re (rawInputsSlave1[0] & (1<<1));
         // CCommand::setRailInput20bel(rawInputsSlave1[0] & (1<<2));
         
@@ -513,6 +519,9 @@ void loop()
         CCommand::setRailInputNbel(rawInputsSlave2[1] & (1<<6));
         CCommand::setRailInputRre (DI::rawInputsSlave1[1] & (1<<1));
         CCommand::setRailInputTbel(rawInputsSlave2[2] & (1<<1));
+        CCommand::setRailInputMre (rawInputsSlave2[5] & (1<<3));
+        CCommand::setRailInputSbel(rawInputsSlave2[5] & (1<<0));
+        
         loopStateNext = 50;
         break;
 
@@ -583,7 +592,13 @@ void loop()
   //===========================================================================
   // 
   //===========================================================================
-
+  uint8_t resetAllButton = rawInputsSlave2[5] & (1<<4);
+  static uint8_t resetAllButtonOld;
+  if (!resetAllButton && resetAllButtonOld) {
+    Serial.println("alle Auftraege manuell zuruecksetzen");
+    CCommand::resetAllCmds();
+  }
+  resetAllButtonOld = resetAllButton;
 
   // diagnoseausgaben alle 10s
   static unsigned long lastDiagTime;
@@ -624,5 +639,5 @@ void loop()
     Serial.println(CCommand::curTarget);
 
   }
-  //printInputs();
+  printInputs();
 }

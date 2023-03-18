@@ -49,7 +49,7 @@ void setJin14(uint8_t val) ;
 void setJin15(uint8_t val) ;
 void setJin16(uint8_t val) ;
 void setJin17(uint8_t val) ;
-void setRes24(uint8_t val) ;
+void setLin20(uint8_t val) ;
 void setRes25(uint8_t val) ;
 void setRes26(uint8_t val) ;
 void setRes27(uint8_t val) ;

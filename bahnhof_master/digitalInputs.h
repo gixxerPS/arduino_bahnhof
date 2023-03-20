@@ -21,7 +21,7 @@ ezButton buttonArray[] = {
 
   // rawInputsSlave1 byte1
   ezButton(12), // 11bel
-  ezButton(13), // Rre
+  ezButton(30), // Rre
   ezButton(10), // 9bel
   ezButton(11), // 10bel
   ezButton( 8), // 7bel

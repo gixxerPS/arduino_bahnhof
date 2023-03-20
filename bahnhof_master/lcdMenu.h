@@ -12,7 +12,7 @@ namespace MYLCD {
 const uint8_t NUM_MENU_ITEMS = 3;
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
-ezButton tasteLinks(30);
+ezButton tasteLinks(32);
 //ezButton tasteOben(31); passt vom platz her nicht mehr
 ezButton tasteSelect(31);
 

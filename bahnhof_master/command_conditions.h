@@ -1075,7 +1075,7 @@ bool cmdBlocksCin14(const commandStruct &cmd) {
         nok = true;
     } else if (cmd.src == cK) { // alle Kin.. 
         nok = true;
-    } else if (cmd.target == cK && cmd.src != c14) { // alle ..inK ausser
+    } else if (cmd.target == cK) { // alle ..inK ausser
         nok = true;
     } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
         nok = true;
@@ -1096,7 +1096,7 @@ bool cmdBlocksDin14(const commandStruct &cmd) {
         nok = true;
     } else if (cmd.src == cK) { 
         nok = true;
-    } else if (cmd.target == cK && cmd.src != c14) { // alle ..inK ausser
+    } else if (cmd.target == cK) { // alle ..inK ausser
         nok = true;
     } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
         nok = true;
@@ -1187,7 +1187,7 @@ bool cmdBlocksCin15(const commandStruct &cmd) {
         nok = true;
     } else if (cmd.src == cK) { // alle Kin.. 
         nok = true;
-    } else if (cmd.target == cK && cmd.src != c14) { // alle ..inK ausser
+    } else if (cmd.target == cK) { // alle ..inK ausser
         nok = true;
     } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
         nok = true;
@@ -1208,7 +1208,7 @@ bool cmdBlocksDin15(const commandStruct &cmd) {
         nok = true;
     } else if (cmd.src == cK) { 
         nok = true;
-    } else if (cmd.target == cK && cmd.src != c14) { // alle ..inK ausser
+    } else if (cmd.target == cK) { // alle ..inK ausser
         nok = true;
     } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
         nok = true;
@@ -1243,7 +1243,7 @@ bool cmdBlocksCin16(const commandStruct &cmd) {
         nok = true;
     } else if (cmd.src == cK) { // alle Kin.. 
         nok = true;
-    } else if (cmd.target == cK && cmd.src != c14) { // alle ..inK ausser
+    } else if (cmd.target == cK) { // alle ..inK ausser
         nok = true;
     } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
         nok = true;
@@ -1264,7 +1264,7 @@ bool cmdBlocksDin16(const commandStruct &cmd) {
         nok = true;
     } else if (cmd.src == cK) { 
         nok = true;
-    } else if (cmd.target == cK && cmd.src != c14) { // alle ..inK ausser
+    } else if (cmd.target == cK) { // alle ..inK ausser
         nok = true;
     } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
         nok = true;
@@ -1299,7 +1299,7 @@ bool cmdBlocksCin17(const commandStruct &cmd) {
         nok = true;
     } else if (cmd.src == cK) { // alle Kin.. 
         nok = true;
-    } else if (cmd.target == cK && cmd.src != c14) { // alle ..inK ausser
+    } else if (cmd.target == cK) { // alle ..inK ausser
         nok = true;
     } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
         nok = true;
@@ -1320,7 +1320,7 @@ bool cmdBlocksDin17(const commandStruct &cmd) {
         nok = true;
     } else if (cmd.src == cK) { 
         nok = true;
-    } else if (cmd.target == cK && cmd.src != c14) { // alle ..inK ausser
+    } else if (cmd.target == cK) { // alle ..inK ausser
         nok = true;
     } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
         nok = true;
@@ -1355,7 +1355,7 @@ bool cmdBlocksCin18(const commandStruct &cmd) {
         nok = true;
     } else if (cmd.src == cK) { // alle Kin.. 
         nok = true;
-    } else if (cmd.target == cK && cmd.src != c14) { // alle ..inK ausser
+    } else if (cmd.target == cK) { // alle ..inK ausser
         nok = true;
     } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
         nok = true;
@@ -1376,7 +1376,7 @@ bool cmdBlocksDin18(const commandStruct &cmd) {
         nok = true;
     } else if (cmd.src == cK) { 
         nok = true;
-    } else if (cmd.target == cK && cmd.src != c14) { // alle ..inK ausser
+    } else if (cmd.target == cK) { // alle ..inK ausser
         nok = true;
     } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
         nok = true;
@@ -1411,7 +1411,7 @@ bool cmdBlocksCin19(const commandStruct &cmd) {
         nok = true;
     } else if (cmd.src == cK) { // alle Kin.. 
         nok = true;
-    } else if (cmd.target == cK && cmd.src != c14) { // alle ..inK ausser
+    } else if (cmd.target == cK) { // alle ..inK ausser
         nok = true;
     } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
         nok = true;
@@ -1432,7 +1432,7 @@ bool cmdBlocksDin19(const commandStruct &cmd) {
         nok = true;
     } else if (cmd.src == cK) { 
         nok = true;
-    } else if (cmd.target == cK && cmd.src != c14) { // alle ..inK ausser
+    } else if (cmd.target == cK) { // alle ..inK ausser
         nok = true;
     } else if (cmd.target == cL && cmd.src != c4) { // alle ..inL ausser
         nok = true;
@@ -1620,6 +1620,10 @@ bool cmdBlocks13To119inA(const commandStruct &cmd) {
         }
     } else if (cmd.src == c12 && cmd.target == cK) {
         nok = true;
+    } else if (cmd.src == c13 && cmd.target == cK) {
+        nok = true;
+    } else if (cmd.src == c14 && cmd.target == cK) {
+        nok = true;
     } else if (cmd.src == c20 && cmd.target == cK) {
         nok = true;
     } else if (cmd.src == c12 && cmd.target == cL) {
@@ -1794,6 +1798,10 @@ bool cmdBlocks13To19inB(const commandStruct &cmd) {
     } else if (cmd.src == cD) { 
             nok = true;
     } else if (cmd.src == c12 && cmd.target == cK) {
+        nok = true;
+    } else if (cmd.src == c13 && cmd.target == cK) {
+        nok = true;
+    } else if (cmd.src == c14 && cmd.target == cK) {
         nok = true;
     } else if (cmd.src == c20 && cmd.target == cK) {
         nok = true;
@@ -2046,7 +2054,13 @@ bool cmdBlocks12To20inK(const commandStruct &cmd)
     return nok;
 }
 bool cmdBlocks12inK(const commandStruct &cmd) {
-    return cmdBlocks12To20inK(cmd);
+    bool nok = false; // also ok = default
+    if (cmdBlocks12To20inK(cmd)) {
+        nok = true;
+    } else if (cmd.src == c20 && cmd.target == cL) {
+        nok = true;
+    }
+    return nok;
 }
 bool cmdBlocks13inK(const commandStruct &cmd) {
     bool nok = false; // also ok = default
@@ -2079,7 +2093,13 @@ bool cmdBlocks14inK(const commandStruct &cmd) {
     return nok;
 }
 bool cmdBlocks20inK(const commandStruct &cmd) {
-    return cmdBlocks12To20inK(cmd);
+    bool nok = false; // also ok = default
+    if (cmdBlocks12To20inK(cmd)) {
+        nok = true;
+    } else if (cmd.src == c12) {
+        nok = true;
+    }
+    return nok;
 }
 //============================================================================
 // inL

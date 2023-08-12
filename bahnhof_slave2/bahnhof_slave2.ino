@@ -149,13 +149,14 @@ void printInputs()
     lastTXTime = millis();
     Serial.println("Eingangsstati >>>>>>>>>>>>>>>>>>>>");
     for (int i = 0; i < RX_SLAVE_BYTE_CNT; i++) {
-      Serial.print("  byte ");
+      Serial.print(" | byte ");
       Serial.print(i);
       Serial.print("=0x");
-      Serial.println(rawInputsSlave2[i], HEX);
+      Serial.print(rawInputsSlave2[i], HEX);
     }
     //Serial.print("pin58=");
     //Serial.println(digitalRead(58));
+    Serial.println();
   }
 }
 void printOutputs()
@@ -165,11 +166,12 @@ void printOutputs()
     lastTXTime = millis();
     Serial.println("Ausgangsstati <<<<<<<<<<<<<<<<<<<<<<");
     for (int i = 0; i < TX_SLAVE_BYTE_CNT; i++) {
-      Serial.print("  byte ");
+      Serial.print(" | byte ");
       Serial.print(i);
       Serial.print("=0x");
-      Serial.println(rawOutputsSlave2[i], HEX);
+      Serial.print(rawOutputsSlave2[i], HEX);
     }
+    Serial.println();
   }
 }
 
@@ -278,8 +280,8 @@ void loop()
   MY_PCF8575::set11inB(rawOutputsSlave2[1] & (1<<7) );
 
   // ausgangsbyte 2 => kanal 0-7 pcf an 0x21
-  MY_PCF8575::setRes32(rawOutputsSlave2[2] & (1<<0));
-  MY_PCF8575::setRes33(rawOutputsSlave2[2] & (1<<1));
+  MY_PCF8575::setRgsp (rawOutputsSlave2[2] & (1<<0));
+  MY_PCF8575::set12gsp(rawOutputsSlave2[2] & (1<<1));
   MY_PCF8575::setRes34(rawOutputsSlave2[2] & (1<<2));
   MY_PCF8575::setRes35(rawOutputsSlave2[2] & (1<<3));
   MY_PCF8575::setRes36(rawOutputsSlave2[2] & (1<<4));
@@ -299,13 +301,13 @@ void loop()
   
     // ausgangsbyte 4 => kanal 0-7 pcf an 0x21
   MY_PCF8575::setLin20(rawOutputsSlave2[4] & (1<<0));
-  MY_PCF8575::setRes25(rawOutputsSlave2[4] & (1<<1));
-  MY_PCF8575::setRes26(rawOutputsSlave2[4] & (1<<2));
-  MY_PCF8575::setRes27(rawOutputsSlave2[4] & (1<<3));
-  MY_PCF8575::setRes28(rawOutputsSlave2[4] & (1<<4));
-  MY_PCF8575::setRes29(rawOutputsSlave2[4] & (1<<5));
-  MY_PCF8575::setRes30(rawOutputsSlave2[4] & (1<<6));
-  MY_PCF8575::setRes31(rawOutputsSlave2[4] & (1<<7));
+  MY_PCF8575::setCein (rawOutputsSlave2[4] & (1<<1));
+  MY_PCF8575::setDein (rawOutputsSlave2[4] & (1<<2));
+  MY_PCF8575::setHein (rawOutputsSlave2[4] & (1<<3));
+  MY_PCF8575::setJein (rawOutputsSlave2[4] & (1<<4));
+  MY_PCF8575::setKgsp (rawOutputsSlave2[4] & (1<<5));
+  MY_PCF8575::setLgsp (rawOutputsSlave2[4] & (1<<6));
+  MY_PCF8575::setMgsp (rawOutputsSlave2[4] & (1<<7));
 
   // ausgangsbyte 5 => kanal 8-15 pcf an 0x21
   MY_PCF8575::setJin17(rawOutputsSlave2[5] & (1<<0));
@@ -318,7 +320,7 @@ void loop()
   MY_PCF8575::setJin9 (rawOutputsSlave2[5] & (1<<7));
   
   printInputs();
-  // printOutputs();
+  printOutputs();
 
 
 }

@@ -5,6 +5,16 @@
 // wird extern (im master ino) mit der entsprechenden pcf8575 funktion verknuepft
 void (*setOut[150])(uint8_t val);
 
+void (*setCein)(uint8_t val);
+void (*setDein)(uint8_t val);
+void (*setHein)(uint8_t val);
+void (*setJein)(uint8_t val);
+
+void (*setKgsp)(uint8_t val);
+void (*setLgsp)(uint8_t val);
+void (*setMgsp)(uint8_t val);
+void (*setRgsp)(uint8_t val);
+void (*set12gsp)(uint8_t val);
 
 void (*set1_IN_A)(uint8_t val);
 void (*set2_IN_A)(uint8_t val);

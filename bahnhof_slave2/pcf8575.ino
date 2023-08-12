@@ -37,8 +37,8 @@ void MY_PCF8575::set15inG(uint8_t val) {pcf8575_2.digitalWrite(11,!val);}
 void MY_PCF8575::set16inG(uint8_t val) {pcf8575_2.digitalWrite(10,!val);}
 void MY_PCF8575::set17inG(uint8_t val) {pcf8575_2.digitalWrite( 9,!val);}
 void MY_PCF8575::set18inG(uint8_t val) {pcf8575_2.digitalWrite( 8,!val);}
-void MY_PCF8575::setRes32(uint8_t val) {pcf8575_2.digitalWrite( 0,!val);}
-void MY_PCF8575::setRes33(uint8_t val) {pcf8575_2.digitalWrite( 1,!val);}
+void MY_PCF8575::setRgsp (uint8_t val) {pcf8575_2.digitalWrite( 0,!val);}
+void MY_PCF8575::set12gsp(uint8_t val) {pcf8575_2.digitalWrite( 1,!val);}
 void MY_PCF8575::setRes34(uint8_t val) {pcf8575_2.digitalWrite( 2,!val);}
 void MY_PCF8575::setRes35(uint8_t val) {pcf8575_2.digitalWrite( 3,!val);}
 void MY_PCF8575::setRes36(uint8_t val) {pcf8575_2.digitalWrite( 4,!val);}
@@ -146,13 +146,13 @@ void MY_PCF8575::setJin15(uint8_t val) {pcf8575_8.digitalWrite(10,!val);}
 void MY_PCF8575::setJin16(uint8_t val) {pcf8575_8.digitalWrite( 9,!val);}
 void MY_PCF8575::setJin17(uint8_t val) {pcf8575_8.digitalWrite( 8,!val);}
 void MY_PCF8575::setLin20(uint8_t val) {pcf8575_8.digitalWrite( 0,!val);}
-void MY_PCF8575::setRes25(uint8_t val) {pcf8575_8.digitalWrite( 1,!val);}
-void MY_PCF8575::setRes26(uint8_t val) {pcf8575_8.digitalWrite( 2,!val);}
-void MY_PCF8575::setRes27(uint8_t val) {pcf8575_8.digitalWrite( 3,!val);}
-void MY_PCF8575::setRes28(uint8_t val) {pcf8575_8.digitalWrite( 4,!val);}
-void MY_PCF8575::setRes29(uint8_t val) {pcf8575_8.digitalWrite( 5,!val);}
-void MY_PCF8575::setRes30(uint8_t val) {pcf8575_8.digitalWrite( 6,!val);}
-void MY_PCF8575::setRes31(uint8_t val) {pcf8575_8.digitalWrite( 7,!val);}
+void MY_PCF8575::setCein (uint8_t val) {pcf8575_8.digitalWrite( 1,!val);}
+void MY_PCF8575::setDein (uint8_t val) {pcf8575_8.digitalWrite( 2,!val);}
+void MY_PCF8575::setHein (uint8_t val) {pcf8575_8.digitalWrite( 3,!val);}
+void MY_PCF8575::setJein (uint8_t val) {pcf8575_8.digitalWrite( 4,!val);}
+void MY_PCF8575::setKgsp (uint8_t val) {pcf8575_8.digitalWrite( 5,!val);}
+void MY_PCF8575::setLgsp (uint8_t val) {pcf8575_8.digitalWrite( 6,!val);}
+void MY_PCF8575::setMgsp (uint8_t val) {pcf8575_8.digitalWrite( 7,!val);}
 
 void MY_PCF8575::setup()
 {

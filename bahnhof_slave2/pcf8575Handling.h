@@ -31,8 +31,8 @@ void set15inG(uint8_t val);
 void set16inG(uint8_t val);
 void set17inG(uint8_t val);
 void set18inG(uint8_t val);
-void setRes32(uint8_t val);
-void setRes33(uint8_t val);
+void setRgsp (uint8_t val) ;
+void set12gsp(uint8_t val);
 void setRes34(uint8_t val);
 void setRes35(uint8_t val);
 void setRes36(uint8_t val);
@@ -50,12 +50,13 @@ void setJin15(uint8_t val) ;
 void setJin16(uint8_t val) ;
 void setJin17(uint8_t val) ;
 void setLin20(uint8_t val) ;
-void setRes25(uint8_t val) ;
-void setRes26(uint8_t val) ;
-void setRes27(uint8_t val) ;
-void setRes28(uint8_t val) ;
-void setRes29(uint8_t val) ;
-void setRes30(uint8_t val) ;
-void setRes31(uint8_t val) ;
+void setCein (uint8_t val) ;
+void setDein (uint8_t val) ;
+void setHein (uint8_t val) ;
+void setJein (uint8_t val) ;
+void setKgsp (uint8_t val) ;
+void setLgsp (uint8_t val) ;
+void setMgsp (uint8_t val) ;
+
 }
 #endif

@@ -694,12 +694,45 @@ int8_t CCommand::checkAndActivateNewCommand()
         activeCommands[fullIdx].railCombi = cmd;
         setOut[activeCommands[fullIdx].railCombi](HIGH); // hier den ausgang setzen / relais einschalten
 
+        // einfahrtsignal schalten ?
+        if (curSrc == cC) {
+            setCein(HIGH);
+        } else if (curSrc == cD) {
+            setDein(HIGH);
+        } else if (curSrc == cH) {
+            setHein(HIGH);
+        } else if (curSrc == cJ) {
+            setJein(HIGH);
+        }
+
+        // gleissperrsignal schalten ?
+        if (curSrc == cK) {
+            setKgsp(HIGH);
+            activeCommands[fullIdx].gspTime = millis();
+        } else if (curSrc == cL) {
+            setLgsp(HIGH);
+            activeCommands[fullIdx].gspTime = millis();
+        } else if (curSrc == cM || curTarget == cM) {
+            setMgsp(HIGH);
+            activeCommands[fullIdx].gspTime = millis();
+        } else if (curSrc == cR) {
+            setRgsp(HIGH);
+            activeCommands[fullIdx].gspTime = millis();
+        } else if (curSrc == c12 || curSrc == c20) {
+            set12gsp(HIGH);
+            activeCommands[fullIdx].gspTime = millis();
+        } else {
+            activeCommands[fullIdx].gspTime = 0;
+        }
+
         Serial.print("Auftrag Nr ");
         Serial.print(fullIdx);
         Serial.print(" akzeptiert. Quelle = ");
         Serial.print(curSrc);
         Serial.print(". Ziel = ");
-        Serial.println(curTarget);
+        Serial.print(curTarget);
+        Serial.print(" gsp Zeit = ");
+        Serial.println(activeCommands[fullIdx].gspTime);
     }
 
     return 1;
@@ -896,6 +929,15 @@ void CCommand::resetAllCmds()
 
 void CCommand::finishCmd(commandStruct &cmd)
 {
+    if (cmd.src == cC) {
+        setCein(LOW);
+    } else if (cmd.src == cD) {
+        setDein(LOW);
+    } else if (cmd.src == cH) {
+        setHein(LOW);
+    } else if (cmd.src == cJ) {
+        setJein(LOW);
+    } 
     activeCmdCount--;
     cmd.active = false;
     setOut[cmd.railCombi](LOW); // hier den ausgang zuruecksetzen / relais ausschalten
@@ -913,6 +955,23 @@ void CCommand::checkAndFinishRunningCommand()
             // COMMAND_DEBUG_PRINT(activeCommands[i].src);
             // COMMAND_DEBUG_PRINT(" target=");
             // COMMAND_DEBUG_PRINTLN(activeCommands[i].target);
+
+            // gleissperrsignal nach zeit zuruecknehmen
+            if (activeCommands[i].gspTime > 0 && millis() - activeCommands[i].gspTime > MS_GSP) {
+                Serial.println("gleissperrzeit abgelaufen");
+                if (activeCommands[i].src == cK) {
+                    setKgsp(LOW);
+                } else if (activeCommands[i].src == cL) {
+                    setLgsp(LOW);
+                } else if (activeCommands[i].src == cM || activeCommands[i].target == cM) {
+                    setMgsp(LOW);
+                } else if (activeCommands[i].src == cR) {
+                    setRgsp(LOW);
+                } else if (activeCommands[i].src == c12 || activeCommands[i].src == c20) {
+                    set12gsp(LOW);
+                }
+            }
+
             if (activeCommands[i].target == c1 ) {
                 if (activeCommands[i].src == cN || activeCommands[i].src == cH) {
                     if (getRailInput1re()) {finishCmd(activeCommands[i]);}

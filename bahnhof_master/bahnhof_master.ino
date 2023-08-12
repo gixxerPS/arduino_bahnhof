@@ -70,6 +70,8 @@ void setDin19(uint8_t val) {bitWrite(rawOutputsSlave2[0], 1, val);};
 void set11inF(uint8_t val) {bitWrite(rawOutputsSlave2[1], 6, val);};
 void set13inF(uint8_t val) {bitWrite(rawOutputsSlave2[1], 3, val);};
 void set14inF(uint8_t val) {bitWrite(rawOutputsSlave2[1], 0, val);};
+void setRgsp (uint8_t val) {bitWrite(rawOutputsSlave2[2], 0, val);};
+void set12gsp(uint8_t val) {bitWrite(rawOutputsSlave2[2], 1, val);};
 void set13inG(uint8_t val) {bitWrite(rawOutputsSlave2[3], 5, val);};
 void set14inG(uint8_t val) {bitWrite(rawOutputsSlave2[3], 4, val);};
 void set15inG(uint8_t val) {bitWrite(rawOutputsSlave2[3], 3, val);};
@@ -78,6 +80,14 @@ void set17inG(uint8_t val) {bitWrite(rawOutputsSlave2[3], 1, val);};
 void set18inG(uint8_t val) {bitWrite(rawOutputsSlave2[3], 0, val);};
 void setJin18(uint8_t val) {bitWrite(rawOutputsSlave2[3], 7, val);};
 void setJin19(uint8_t val) {bitWrite(rawOutputsSlave2[3], 6, val);};
+void setLin20(uint8_t val) {bitWrite(rawOutputsSlave2[4], 0, val);};
+void setCein (uint8_t val) {bitWrite(rawOutputsSlave2[4], 1, val);};
+void setDein (uint8_t val) {bitWrite(rawOutputsSlave2[4], 2, val);};
+void setHein (uint8_t val) {bitWrite(rawOutputsSlave2[4], 3, val);};
+void setJein (uint8_t val) {bitWrite(rawOutputsSlave2[4], 4, val);};
+void setKgsp (uint8_t val) {bitWrite(rawOutputsSlave2[4], 5, val);};
+void setLgsp (uint8_t val) {bitWrite(rawOutputsSlave2[4], 6, val);};
+void setMgsp (uint8_t val) {bitWrite(rawOutputsSlave2[4], 7, val);};
 void setJin9 (uint8_t val) {bitWrite(rawOutputsSlave2[5], 7, val);};
 void setJin10(uint8_t val) {bitWrite(rawOutputsSlave2[5], 6, val);};
 void setJin11(uint8_t val) {bitWrite(rawOutputsSlave2[5], 5, val);};
@@ -86,7 +96,6 @@ void setJin14(uint8_t val) {bitWrite(rawOutputsSlave2[5], 3, val);};
 void setJin15(uint8_t val) {bitWrite(rawOutputsSlave2[5], 2, val);};
 void setJin16(uint8_t val) {bitWrite(rawOutputsSlave2[5], 1, val);};
 void setJin17(uint8_t val) {bitWrite(rawOutputsSlave2[5], 0, val);};
-void setLin20(uint8_t val) {bitWrite(rawOutputsSlave2[4], 0, val);};
 
 void connectSetOutFunctions() 
 {
@@ -242,6 +251,17 @@ CCommand::setOut[CCommand::iL_IN_9] = &MY_PCF8575::setLin9;
 CCommand::setOut[CCommand::iL_IN_12] = &MY_PCF8575::setLin12;
 CCommand::setOut[CCommand::iL_IN_20] = &setLin20;
 
+CCommand::setCein = &setCein; // sonderausgang f einfahrtssignal
+CCommand::setDein = &setDein; // sonderausgang f einfahrtssignal
+CCommand::setHein = &setHein; // sonderausgang f einfahrtssignal
+CCommand::setJein = &setJein; // sonderausgang f einfahrtssignal
+
+CCommand::setKgsp = &setKgsp; // sonderausgang f gleissperrsignal
+CCommand::setLgsp = &setLgsp; // sonderausgang f gleissperrsignal
+CCommand::setMgsp = &setMgsp; // sonderausgang f gleissperrsignal
+CCommand::setRgsp = &setRgsp; // sonderausgang f gleissperrsignal
+CCommand::set12gsp = &set12gsp; // sonderausgang f gleissperrsignal
+
 }
 void printInputs()
 {
@@ -266,20 +286,21 @@ void printInputs()
     Serial.println();
   }
 }
-// void printOutputs()
-// {
-//   static unsigned long lastTXTime;
-//   if (millis() - lastTXTime > 10000) {
-//     lastTXTime = millis();
-//     Serial.println("Ausgangsstati <<<<<<<<<<<<<<<<<<<<<<");
-//     for (int i = 0; i < TX_SLAVE_BYTE_CNT; i++) {
-//       Serial.print("  byte ");
-//       Serial.print(i);
-//       Serial.print("=0x");
-//       Serial.println(rawOutputsSlave2[i], HEX);
-//     }
-//   }
-// }
+void printOutputs()
+{
+  static unsigned long lastTXTime;
+  if (millis() - lastTXTime > 10000) {
+    lastTXTime = millis();
+    Serial.println("Ausgangsstati <<<<<<<<<<<<<<<<<<<<<<");
+    for (int i = 0; i < TX_SLAVE_BYTE_CNT; i++) {
+      Serial.print(" | byte ");
+      Serial.print(i);
+      Serial.print("=0x");
+      Serial.print(rawOutputsSlave2[i], HEX);
+    }
+    Serial.println();
+  }
+}
 void evalAndPrintLoopTime () {
   static unsigned long loopTimeStart = 0;
   static unsigned long loopDeltaArr[N_LOOP_AVG]; // 0...N_LOOP_AVG => N+1 werte!
@@ -640,4 +661,5 @@ void loop()
 
   }
   printInputs();
+  //printOutputs();
 }

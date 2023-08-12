@@ -17,6 +17,7 @@ namespace CCommand
   #include "command_rail_input.h" // excel generiertes zeugs
   #include "command_rail_output.h" // excel generiertes zeugs
   const uint8_t N_COMMANDS = 16;
+  const unsigned long MS_GSP = 20000; // [ms] gleissperrzeit
 
   uint32_t cmdInputs1_32;
   uint32_t cmdInputsA_Z;
@@ -234,9 +235,7 @@ namespace CCommand
     eRail target;
     eCMD railCombi; // ausgang/relais um src mit target zu verbinden => gleichzeitig zum indizieren von ausgangsfunktion und belegtfunktion
     bool railReleaseState; // bei ausfahrtsgleisen wird bei flanke 1 -> 0 der auftrag wieder zurueckgesetzt
-
-    // vllt so....
-    //bool (*doneFctPtr)(); //* funktionspointer auf bedingung damit auftrag fertig ist. z.b. getRailInput1li()
+    unsigned long gspTime; // [ms] gleissperr startzeit
   };
   commandStruct activeCommands[N_COMMANDS]; // befehle die gleichzeitig aktiv sein koennen
 
@@ -270,6 +269,5 @@ namespace CCommand
   void finishCmdByIdx(uint8_t idx);
   
   eCMD mapSrcTarget2Cmd(eRail src, eRail target);
-
 };
 #endif

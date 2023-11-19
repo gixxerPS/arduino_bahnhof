@@ -16,19 +16,22 @@ void MYDISPLAY::setup(void)
   oled.setFont( u8x8_font_7x14_1x2_f ); // enthaelt "°"; 2427 byte 4
 
   oled.setCursor(0, 0);
-  oled.print(F("Jetzt mit"));
+  oled.print(F("Kohlenzug"));
 
   oled.setCursor(0, 2);
-  oled.print(F("einer schoenen"));
+  oled.print(F("V0.1.0"));
 
   oled.setCursor(0, 4);
-  oled.print(F("nachhaltigen"));
+  oled.print(F("----------------"));
 
   oled.setCursor(0, 6);
-  oled.print(F("Struktur"));
+  oled.print(F("Init"));
 }
+
+
 
 void MYDISPLAY::loop(void)
 {
+    
 
 }

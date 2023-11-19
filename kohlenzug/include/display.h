@@ -6,7 +6,8 @@
 
 namespace MYDISPLAY {
 
-const uint8_t NUM_MENU_ITEMS = 3;
+// const uint8_t NUM_MENU_ITEMS = 3;
+const unsigned long UPDATE_CYCLE = 2000; // [ms]
 
 extern U8X8_SH1106_128X64_NONAME_HW_I2C oled; // 1,3"
 // U8X8_SSD1306_128X64_NONAME_HW_I2C oled(U8X8_PIN_NONE); // 0,96"

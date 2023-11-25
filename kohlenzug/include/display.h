@@ -18,6 +18,8 @@ extern U8X8_SH1106_128X64_NONAME_HW_I2C oled; // 1,3"
 
 void setup();
 void loop();
+void updateStep(uint16_t step);
+void updateAuto(bool autoStatus);
 
 }
 #endif

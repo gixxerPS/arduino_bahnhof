@@ -39,4 +39,21 @@ namespace DO
     {
     }
 
+    void allOutsOff()
+    {
+        setOutV200Anwahl(LOW);
+        setOutBr41Anwahl(LOW);
+        setOutBr53Anwahl(LOW);
+        setOutStop(LOW);
+        setOutRichtungRueck(LOW);
+        setOutBR53Rangiergeschw(LOW);
+        setOutEntk1Hoch(LOW);
+        setOutWeiche1(LOW);
+        setOutWeiche2(LOW);
+        setOutWeiche3(LOW);
+        setOutEntk41Hoch(LOW);
+        setOutV200Rangiergeschw(LOW);
+        setOutLichtschrankeAn(LOW);
+        setOutStart(LOW);  
+    }
 }

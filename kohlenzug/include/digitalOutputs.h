@@ -23,8 +23,9 @@ namespace DO
 
     void setup();
     void loop();
+    void allOutsOff();
 
-    // Relais funktionen
+    // Zugriffsfunktionen fuer Relaisausgaenge
     // Relais Modul: 
     //   5V -> Relais AUS
     //   0V -> Relais AN

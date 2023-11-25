@@ -1,4 +1,7 @@
 #include "display.h"
+#include "sequence.h"
+#include "digitalInputs.h"
+#include "digitalOutputs.h"
 
 using namespace MYDISPLAY;
 
@@ -26,12 +29,63 @@ void MYDISPLAY::setup(void)
 
   oled.setCursor(0, 6);
   oled.print(F("Init"));
+
+  delay(3000);
+
+  oled.setCursor(0, 0);
+  oled.print(F("Automatik: AUS"));
+
+  oled.setCursor(0, 2);
+  oled.print(F("Schritt  :"));
+
+  oled.setCursor(0, 6);
+  oled.print(F("Warte auf Freig"));
+
+
 }
+void MYDISPLAY::updateAuto(bool autoStatus)
+{
+    if (autoStatus) {
+        oled.setCursor(11, 0);
+        oled.print(F("EIN"));
+    } else {
+        oled.setCursor(11, 0);
+        oled.print(F("AUS"));
+    }
+}
+void MYDISPLAY::updateStep(uint16_t step)
+{
+    char buf[4];
+    oled.setCursor(11, 2);
+    sprintf(buf, "%4d", step);
+    oled.print(buf);
 
-
+    if (step == 0) {
+        oled.setCursor(0, 6);
+        oled.print(F("Warte auf Freig"));
+        oled.print(F("               "));
+    } else if (step > 0 && step < 211) {
+        oled.setCursor(0, 6);
+        oled.print(F("BR53           "));
+    } else if (step >= 211 && step < 660) {
+        oled.setCursor(0, 6);
+        oled.print(F("V200           "));
+    } else if (step >= 660 && step < 999) {
+        oled.setCursor(0, 6);
+        oled.print(F("BR41           "));
+    }
+}
 
 void MYDISPLAY::loop(void)
 {
-    
+    static bool autoOld;
+    if (SEQ::stepChange) {
+        updateStep(SEQ::step);
+    }
 
+    bool autoStatus = DI::isAutoEnabled();
+    if (autoOld != autoStatus) {
+        updateAuto(autoStatus);
+    }
+    autoOld = autoStatus;
 }

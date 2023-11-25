@@ -16,6 +16,7 @@
 #include <Arduino.h>
 
 #include "display.h"
+#include "sequence.h"
 #include "digitalInputs.h"
 #include "digitalOutputs.h"
 
@@ -35,12 +36,10 @@ void setup(void)
   DI::setup();
   DO::setup();
 }
-const unsigned long del = 500;
 
-void loop(void)
+void testDO(void) 
 {
-  MYDISPLAY::loop();
-  DI::loop();
+  const unsigned long del = 500;
 
   Serial.println(F("setOutBr53Anwahl"));
   DO::setOutBr53Anwahl(HIGH);
@@ -112,4 +111,14 @@ Serial.println(F("setOutStart"));
   delay(del);
   DO::setOutStart(LOW);
 
+
+}
+
+void loop(void)
+{
+  
+  DI::loop();
+  SEQ::loop();
+
+  MYDISPLAY::loop();
 }

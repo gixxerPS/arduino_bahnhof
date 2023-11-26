@@ -25,7 +25,7 @@ void setup(void)
   Serial.begin(9600);
   while (!Serial);
 
-  Serial.println(F(">>>>>>>>>>>>>>>>>>>>>>> Kohlenzug V0.1.0 <<<<<<<<<<<<<<<<<<<"));
+  Serial.println(F(">>>>>>>>>>>>>>>>>>>>>>> Kohlenzug V0.2.0 <<<<<<<<<<<<<<<<<<<"));
 
   Serial.print(F("  Kompilierzeitstempel: "));
   Serial.print(F(__DATE__));

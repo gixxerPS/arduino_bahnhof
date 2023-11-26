@@ -22,7 +22,7 @@ void MYDISPLAY::setup(void)
   oled.print(F("Kohlenzug"));
 
   oled.setCursor(0, 2);
-  oled.print(F("V0.1.0"));
+  oled.print(F("V0.2.0"));
 
   oled.setCursor(0, 4);
   oled.print(F("----------------"));
@@ -66,13 +66,13 @@ void MYDISPLAY::updateStep(uint16_t step)
         oled.print(F("               "));
     } else if (step > 0 && step < 211) {
         oled.setCursor(0, 6);
-        oled.print(F("BR53           "));
-    } else if (step >= 211 && step < 660) {
+        oled.print(F("PROG BR53      "));
+    } else if (step >= 211 && step < 661) {
         oled.setCursor(0, 6);
-        oled.print(F("V200           "));
-    } else if (step >= 660 && step < 999) {
+        oled.print(F("PROG V200      "));
+    } else if (step >= 661 && step < 999) {
         oled.setCursor(0, 6);
-        oled.print(F("BR41           "));
+        oled.print(F("PROG BR41      "));
     }
 }
 

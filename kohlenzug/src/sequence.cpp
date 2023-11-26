@@ -275,9 +275,130 @@ namespace SEQ
                 }
             break;
 
-            // TODO: weiter mit seite 2 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+            case 450: // Entk 41 oben ?
+                if (DI::getInEntk41Oben()) {
+                    step = 460;
+                }
+            break;
+
+            case 460: // startimpuls
+                DO::setOutStart(HIGH);
+                if (millis() - stepStartMillis > T2) {
+                    DO::setOutStart(LOW);
+                    step = 500;
+                }
+            break;
+
+            case 500: // reed v200 aktiv ?
+                if (DI::getInV200Entk1()) {
+                    step = 510;
+                }
+            break;
+
+            case 510: // stop impuls
+                DO::setOutStop(HIGH);
+                if (millis() - stepStartMillis > T2) {
+                    DO::setOutStop(LOW);
+                    DO::setOutLichtschrankeAn(LOW);
+                    DO::setOutEntk41Hoch(LOW);
+                    step = 511;
+                }
+            break;  
+
+            case 511: // richtungswechsel impuls
+                DO::setOutRichtungRueck(HIGH);
+                if (millis() - stepStartMillis > T3) {
+                    DO::setOutRichtungRueck(LOW);
+                    step = 550;
+                }
+            break;
+
+            case 550: // reed v200 aktiv ?
+                if (DI::getInV200Entk1()) {
+                    step = 560;
+                }
+            break;
+
+            case 560: // stop impuls
+                DO::setOutStop(HIGH);
+                if (millis() - stepStartMillis > T2) {
+                    DO::setOutStop(LOW);
+                    DO::setOutWeiche2(HIGH);
+                    DO::setOutEntk1Hoch(HIGH);
+                    step = 561;
+                }
+            break; 
             
-            
+            case 561: // richtungswechsel impuls
+                DO::setOutRichtungRueck(HIGH);
+                if (millis() - stepStartMillis > T3) {
+                    DO::setOutRichtungRueck(LOW);
+                    step = 600;
+                }
+            break;
+
+            case 600: // Entk 1 oben ?
+                if (DI::getInEntk1Oben()) {
+                    step = 610;
+                }
+            break;
+
+            case 610: // startimpuls
+                DO::setOutStart(HIGH);
+                if (millis() - stepStartMillis > T2) {
+                    DO::setOutStart(LOW);
+                    step = 650;
+                }
+            break;
+
+            case 650: // Prellbock Weiche 2 ?
+                if (DI::getInPrellbockW2()) {
+                    step = 660;
+                }
+            break;
+
+            case 660: // stop impuls
+                DO::setOutStop(HIGH);
+                if (millis() - stepStartMillis > T2) {
+                    DO::setOutStop(LOW);
+                    DO::setOutWeiche2(LOW);
+                    DO::setOutEntk1Hoch(LOW);
+
+                    DO::setOutV200Anwahl(LOW);
+                    DO::setOutBr41Anwahl(HIGH);
+
+                    step = 661;
+                }
+            break; 
+
+//=============================================================================
+// BR41
+//=============================================================================
+
+            case 661: // richtungswechsel impuls
+                DO::setOutRichtungRueck(HIGH);
+                if (millis() - stepStartMillis > T3) {
+                    DO::setOutRichtungRueck(LOW);
+                    step = 700;
+                }
+            break;
+
+            case 700: // reed BR41 aktiv ?
+                if (DI::getInBr41Entk1()) {
+                    step = 710;
+                }
+            break;
+
+            case 710: // weiche 3 ein, start impuls
+                DO::setOutWeiche3(HIGH);
+                DO::setOutStart(HIGH);
+                if (millis() - stepStartMillis > T2) {
+                    DO::setOutStart(LOW);
+                    step = 999;
+                }
+            break;
+
+
             default: // should not happen
                 break;
         }

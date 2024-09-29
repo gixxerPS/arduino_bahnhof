@@ -1,6 +1,8 @@
 /**
  * @mainpage
  * Logik controller der buehnen steuerung fuer diethelm.
+ * 
+ * https://github.com/gixxerPS/arduino_bahnhof/tree/main/buehne
  *
  * - 3x 8er Relaismodule -> 24 DO
  * - 4x 8er Eingaenge direkt / Pulldown -> 32 DI
@@ -11,12 +13,36 @@
  * INx = true  => relais AUS
  * JD-VCC, GND = Last 5V versorgung fuer relais => 2. netzteil
  * VCC, GND = Steuerspannung
+ * 
+ * Unklahrheiten:
+ * - 
  */
 #include <Arduino.h>
 
 #include "sequence.h"
 #include "digitalInputs.h"
 #include "digitalOutputs.h"
+
+const uint8_t PIN_GESCHW = 21; // INT0
+
+
+volatile bool flagGeschw = false;
+volatile bool flagImpulsVerpasst = false;
+volatile unsigned long msPulsGeschwJetzt = 0;
+volatile unsigned long msPulsGeschwVorher = 0;
+
+void speedMessungInterrupt() {
+  unsigned long msNow = millis();
+  if (msNow - msPulsGeschwJetzt > 100) { // alles kleiner 100ms ignorieren (debounce)
+    if (!flagGeschw) { // wird nach auswertung wieder zurueckgesetzt
+        msPulsGeschwVorher = msPulsGeschwJetzt;
+        msPulsGeschwJetzt = msNow;
+        flagGeschw = true; 
+    } else { // auswertung dauerte laenger als der naechste impuls reinkam
+      flagImpulsVerpasst = true; 
+    }
+  }
+}
 
 void setup(void)
 {
@@ -31,90 +57,57 @@ void setup(void)
   Serial.println(F(__TIME__));
 
   DI::setup();
-  DO::setup();
+
+  pinMode(PIN_GESCHW, INPUT_PULLUP); 
+  attachInterrupt(digitalPinToInterrupt(PIN_GESCHW), speedMessungInterrupt, RISING); // 21=INT0
+  //DO::setup();
 }
 
 void testDO(void) 
 {
   const unsigned long del = 500;
 
-  Serial.println(F("setOutBr53Anwahl"));
-  DO::setOutBr53Anwahl(HIGH);
+  Serial.println(F("setOutEinfGleiszentrAus"));
+  DO::setOutEinfGleiszentrAus(HIGH);
   delay(del);
-  DO::setOutBr53Anwahl(LOW);
-
-Serial.println(F("setOutV200Anwahl"));
-  DO::setOutV200Anwahl(HIGH);
-  delay(del);
-  DO::setOutV200Anwahl(LOW);
-
-Serial.println(F("setOutBr41Anwahl"));
-  DO::setOutBr41Anwahl(HIGH);
-  delay(del);
-  DO::setOutBr41Anwahl(LOW);
-
-Serial.println(F("setOutStop"));
-  DO::setOutStop(HIGH);
-  delay(del);
-  DO::setOutStop(LOW);
-
-Serial.println(F("setOutRichtungRueck"));
-  DO::setOutRichtungRueck(HIGH);
-  delay(del);
-  DO::setOutRichtungRueck(LOW);
-
-Serial.println(F("setOutBR53Rangiergeschw"));
-  DO::setOutBR53Rangiergeschw(HIGH);
-  delay(del);
-  DO::setOutBR53Rangiergeschw(LOW);
-
-Serial.println(F("setOutEntk1Hoch"));
-  DO::setOutEntk1Hoch(HIGH);
-  delay(del);
-  DO::setOutEntk1Hoch(LOW);
-
-Serial.println(F("setOutWeiche1"));
-  DO::setOutWeiche1(HIGH);
-  delay(del);
-  DO::setOutWeiche1(LOW);
-
-Serial.println(F("setOutWeiche2"));
-  DO::setOutWeiche2(HIGH);
-  delay(del);
-  DO::setOutWeiche2(LOW);
-
-Serial.println(F("setOutWeiche3"));
-  DO::setOutWeiche3(HIGH);
-  delay(del);
-  DO::setOutWeiche3(LOW);
-
-Serial.println(F("setOutEntk41Hoch"));
-  DO::setOutEntk41Hoch(HIGH);
-  delay(del);
-  DO::setOutEntk41Hoch(LOW);
-
-Serial.println(F("setOutV200Rangiergeschw"));
-  DO::setOutV200Rangiergeschw(HIGH);
-  delay(del);
-  DO::setOutV200Rangiergeschw(LOW);
-
-Serial.println(F("setOutLichtschrankeAn"));
-  DO::setOutLichtschrankeAn(HIGH);
-  delay(del);
-  DO::setOutLichtschrankeAn(LOW);
-
-Serial.println(F("setOutStart"));
-  DO::setOutStart(HIGH);
-  delay(del);
-  DO::setOutStart(LOW);
+  DO::setOutEinfGleiszentrAus(LOW);
 
 
 }
 
 void loop(void)
 {
-  
-  DI::loop();
-  SEQ::loop();
+  static unsigned long msLastOutput = 0;
+  unsigned long msNow = millis();
 
+  DI::loop();
+  // SEQ::loop();
+
+  if (flagGeschw) {
+    flagGeschw = false;
+    if (msPulsGeschwVorher > 0 && msPulsGeschwJetzt > 0) {
+      Serial.print(F("deltaT = "));
+      unsigned long deltaT = (msPulsGeschwJetzt-msPulsGeschwVorher);
+      Serial.print(deltaT);
+      Serial.println(F(" ms"));
+    }
+  }
+
+  if (flagImpulsVerpasst) {
+    flagImpulsVerpasst = false;
+    Serial.println(F("Geschwindigkeitsimpuls verpasst :("));
+  }
+
+  if (msNow - msLastOutput > 100000) {
+    msLastOutput = msNow;
+    Serial.print( F("getInEIN: ") );
+    Serial.print( DI::getInEIN() );
+    Serial.print( F(" | getInAUS: ") );
+    Serial.print( DI::getInAUS() );
+    Serial.print( F(" | getInAUS_BUEHNE: ") );
+    Serial.print( DI::getInAUSBUEHNE() );
+    Serial.print( F(" | geschw: ") );
+    Serial.print( digitalRead(PIN_GESCHW) );
+    Serial.println();
+  }
 }

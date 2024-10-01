@@ -81,7 +81,7 @@ void loop(void)
   unsigned long msNow = millis();
 
   DI::loop();
-  // SEQ::loop();
+  SEQ::loop();
 
   if (flagGeschw) {
     flagGeschw = false;

@@ -9,7 +9,9 @@ namespace SEQ
     const unsigned long T_IMPULS_ZENTRIERUNG = 2000; // [ms] impulslaenge zentrierung ausfahren
     const unsigned long T_IMPULS_ENDSCHALTER = 2000; // [ms] impulslaenge zentrierung ausfahren
     const unsigned long T_IMPULS_AUFZUGFAST = 6000; // [ms] impulslaenge
+    const unsigned long T_IMPULS_BUEHNEFAST = 6000; // [ms] impulslaenge
     const unsigned long T_IMPULS_GLEISVERRIEGELUNG = 2000; // [ms] impulslaenge
+    const unsigned long T_IMPULS_UMSCH_RECHTSLINKS = 2000; // [ms] impulslaenge
     
     extern uint16_t step;
     extern uint16_t stepOld; // step vom letzten zyklus

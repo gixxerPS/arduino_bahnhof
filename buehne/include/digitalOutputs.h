@@ -10,16 +10,16 @@ namespace DO
     const uint8_t PIN_2_ZUG_AUF_BUEHNE_START    = 47; // zug von einfahrtsgleis auf buehne koppeln
     const uint8_t PIN_3_EINF_GLEISZENTR_EIN     = 44;
     const uint8_t PIN_4_FUEHLER_AUS             = 45;
-    const uint8_t PIN_5_MOTOR_SLOW              = 42;
+    const uint8_t PIN_5_MOTOR_SLOW_WAND         = 42; // buehnen motor an, richtung wand
     const uint8_t PIN_6_MOTOR_FAST              = 43;
-    const uint8_t PIN_7_RICHTUNG_AENDERN        = 40;
+    const uint8_t PIN_7_MOTOR_SLOW_GANG         = 40; // buehnen motor an, richtung gang
     const uint8_t PIN_8_AUSF_GLEISZENTR_AUS     = 41;
 
     // Relaismodule 2 (mitte)
     const uint8_t PIN_9_ZUG_AUF_AUS_START       = 38; // zug auf ausfahrtsgleis koppeln
     const uint8_t PIN_10_ENDSCH_AUFZUGGL_EINF   = 39;
     const uint8_t PIN_11_AUFZUG_START_SLOW      = 36;
-    const uint8_t PIN_12_AUFZUG_START_FAST      = 37;
+    const uint8_t PIN_12_RESERVE                = 37; // vorher AUFZUG_START_FAST jetzt reserve
     const uint8_t PIN_13_AUFZUGGL_ANSCHALTEN    = 34;
     const uint8_t PIN_14_AUFZUG_NACH_UNTEN      = 35;
     const uint8_t PIN_15_AUFZUGGL_VERRIEGEL_AN  = 32;
@@ -47,9 +47,9 @@ namespace DO
     inline void setOutZugAufBuehneStart(uint8_t val) { digitalWrite(PIN_2_ZUG_AUF_BUEHNE_START, !val); }
     inline void setOutEinfGleiszentrEin(uint8_t val) { digitalWrite(PIN_3_EINF_GLEISZENTR_EIN, !val); }
     inline void setOutFuehlerAus(uint8_t val) { digitalWrite(PIN_4_FUEHLER_AUS, !val); }
-    inline void setOutMotorSlow(uint8_t val) { digitalWrite(PIN_5_MOTOR_SLOW, !val); }
+    inline void setOutMotorSlowWand(uint8_t val) { digitalWrite(PIN_5_MOTOR_SLOW_WAND, !val); }
     inline void setOutMotorFast(uint8_t val) { digitalWrite(PIN_6_MOTOR_FAST, !val); }
-    inline void setOutRichtungAendern(uint8_t val) { digitalWrite(PIN_7_RICHTUNG_AENDERN, !val); }
+    inline void setOutMotorSlowGang(uint8_t val) { digitalWrite(PIN_7_MOTOR_SLOW_GANG, !val); }
     inline void setOutAusfGleiszentrAus(uint8_t val) { digitalWrite(PIN_8_AUSF_GLEISZENTR_AUS, !val); }
 
     inline void setOutZugAufAusStart(uint8_t val) { digitalWrite(PIN_9_ZUG_AUF_AUS_START, !val); }

@@ -130,8 +130,100 @@ namespace SEQ
                 && !DI::getInEINFBUEHNEBESETZT()
                 
                 && DI::getInEIN() ) {
-                    DO::setOutAufzugStartFast(LOW);
+                    DO::setOutEinfGleiszentrAus(HIGH);
                     step = 0; // FERTIG 
+                }
+            break;
+
+            case 2010: // Zentrierung Einfahrtsgleis ausfahren
+                DO::setOutAusfGleiszentrAus(HIGH);
+                if (millis() - stepStartMillis > T_IMPULS_ZENTRIERUNG) {
+                    DO::setOutAusfGleiszentrAus(LOW);
+                    step = 2020;
+                }
+            break;
+
+            case 2020: // warten auf wippe unten
+                if ( DI::getInWIPPEUNTEN() ) {
+                    
+                    DO::setOutZugAufBuehneStart(HIGH);
+
+                    // setGeschwWert(SPEED_MIN) // = 15 = 3,5 V
+                    DO::setOutGeschwBit0(HIGH);
+                    DO::setOutGeschwBit1(HIGH);
+                    DO::setOutGeschwBit2(HIGH);
+                    DO::setOutGeschwBit3(HIGH);
+                    step = 2030;
+                }
+            break;
+
+            case 2030: // warten auf endschalter
+
+                // HIER GESCHWINDIGKEIT STEUERN UND UEBERWACHEN
+
+
+                if ( DI::getInWIPPEUNTEN() ) {
+                    DO::setOutZugAufBuehneStart(LOW);
+                    step = 2040;
+                }
+            break;
+
+            case 2040: // Zentrierung Einfahrtsgleis einfahren
+                DO::setOutEinfGleiszentrEin(HIGH);
+                if (millis() - stepStartMillis > T_IMPULS_ZENTRIERUNG) {
+                    DO::setOutEinfGleiszentrEin(LOW);
+                    step = 2050;
+                }
+            break;
+
+            case 2050: // warten auf wippe oben
+                if ( DI::getInWIPPEOBEN() ) {
+                    DO::setOutAusfGleiszentrAus(HIGH); // TODO: laut text Gleiszentrierung Ausfahrt einfahren. impuls 2s notwendig?
+                    step = 2060;
+                }
+            break;
+
+            case 2060: // Impulsdauer Gleiszentrierung Ausfahrt
+                DO::setOutAusfGleiszentrAus(HIGH);
+                if (millis() - stepStartMillis > T_IMPULS_ZENTRIERUNG) {
+                    DO::setOutAusfGleiszentrAus(LOW);
+                    step = 2070;
+                }
+            break;
+
+            case 2070: // Buehnenfuehler ausfahren
+                if (!DI::getInEINFGLEISBESETZT() && !DI::getInAUSFGLEISBESETZT()) {
+                    DO::setOutFuehlerAus(HIGH);
+                    step = 2080;
+                }
+            break;
+
+            case 2080: // Start Buehnenmotor
+                if (DI::getInFUEHLEREINGEFAHREN()) {
+                    DO::setOutFuehlerAus(LOW);
+                    DO::setOutMotorSlow(HIGH);
+                    DO::setOutMotorFast(HIGH);
+                    step = 2090;
+                }
+            break;
+
+            case 2090: // Impulsdauer Buehne Fast und warten auf fuehler
+                // @TODO: impuls richtig? wann sonst fast wieder aus
+                if (millis() - stepStartMillis > T_IMPULS_BUEHNEFAST) {
+                    DO::setOutMotorFast(LOW);
+                }
+
+                if ( DI::getInFUEHLEREINGERASTET() ) {
+                    DO::setOutMotorSlow(LOW);
+                    step = 2100;
+                }
+            break;
+
+            case 2100: // Impulsdauer Umschalten rechts/links
+                DO::setOutRichtungAendern(HIGH);
+                if (millis() - stepStartMillis > T_IMPULS_UMSCH_RECHTSLINKS) {
+                    DO::setOutRichtungAendern(LOW);
+                    step = 0; // FERTIG
                 }
             break;
 

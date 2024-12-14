@@ -6,12 +6,15 @@
 namespace SEQ
 {
     const unsigned long T_SERIAL_AUSGABE = 10000; // [ms] schrittinfo ausgabe alle x ms
-    const unsigned long T_IMPULS_ZENTRIERUNG = 2000; // [ms] impulslaenge zentrierung ausfahren
-    const unsigned long T_IMPULS_ENDSCHALTER = 2000; // [ms] impulslaenge zentrierung ausfahren
-    const unsigned long T_IMPULS_AUFZUGFAST = 6000; // [ms] impulslaenge
-    const unsigned long T_IMPULS_BUEHNEFAST = 6000; // [ms] impulslaenge
-    const unsigned long T_IMPULS_GLEISVERRIEGELUNG = 2000; // [ms] impulslaenge
-    const unsigned long T_IMPULS_UMSCH_RECHTSLINKS = 2000; // [ms] impulslaenge
+    const unsigned long T_VERZ_START_F_DREHR = 10000; // [ms] verzoegerung startbefehl fuer drehrichtungswahl
+    const unsigned long T_STOER_ANZ = 10000; // [ms] anzeigedauer stoerung
+    const unsigned long T_STOER_IMPULS = 500; // [ms] anzeigedauer stoerung
+    
+    enum RICHTUNG {
+        KEINE = 0,
+        LINKS = 1,
+        RECHTS = 2
+    };
     
     extern uint16_t step;
     extern uint16_t stepOld; // step vom letzten zyklus

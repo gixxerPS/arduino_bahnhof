@@ -24,6 +24,15 @@ namespace DO
 
         pinMode(PIN_LINKS, OUTPUT);
         digitalWrite(PIN_LINKS, HIGH); // Relais sofort ausschalten
+
+        pinMode(PIN_START, OUTPUT);
+        digitalWrite(PIN_START, HIGH); // Relais sofort ausschalten
+
+        pinMode(PIN_STOERUNG, OUTPUT);
+        digitalWrite(PIN_STOERUNG, HIGH); // Relais sofort ausschalten
+
+        pinMode(PIN_FAHRSTROM, OUTPUT);
+        digitalWrite(PIN_FAHRSTROM, HIGH); // Relais sofort ausschalten
     }
 
     void loop()
@@ -32,12 +41,16 @@ namespace DO
 
     void allOutsOff()
     {
-        setOutRechts(LOW);      // PIN_1_EINF_GLEISZENTR_AUS
-        setOutLinks(LOW);      // PIN_2_ZUG_AUF_BUEHNE_START
+        setOutRechts(LOW);      
+        setOutLinks(LOW);      
+        setOutStart(LOW); 
+        setOutStoerung(LOW); 
+        setOutFahrstrom(LOW); 
+
         for (int i = 0; i < 16; i++)
         {
             pcf8575.digitalWrite  (i, HIGH); // default is low aber low heisst relais an!
-            pcf8575_2.digitalWrite(i, LOW);
+            pcf8575_2.digitalWrite(i, HIGH);
         }
     }
 }

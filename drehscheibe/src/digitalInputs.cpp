@@ -1,4 +1,5 @@
 #include "digitalInputs.h"
+#include "appConstants.h"
 
 namespace DI
 {

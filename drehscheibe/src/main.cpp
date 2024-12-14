@@ -4,16 +4,6 @@
  * 
  * https://github.com/gixxerPS/arduino_bahnhof/tree/main/drehscheibe
  *
- * - 3x 8er Relaismodule -> 24 DO
- * - 4x 8er Eingaenge direkt / Pulldown -> 32 DI
- *
- * 8-fach Relais-Module
- * ====================
- * INx = false => relais AN
- * INx = true  => relais AUS
- * JD-VCC, GND = Last 5V versorgung fuer relais => 2. netzteil
- * VCC, GND = Steuerspannung
- * 
  * Unklahrheiten:
  * - test
  */
